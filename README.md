@@ -1,9 +1,3 @@
 # LudumDare33
 test
-aww yeah
-XDDDDDD
-DUS PRO
-sACK MA DIGS GUIS
-HAHAHAHA
-DIS MLGX SKILLZ
-720 NUSCOUP 1MS
+Ich mag Käse
