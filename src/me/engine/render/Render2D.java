@@ -77,6 +77,23 @@ public class Render2D {
 
 	public void lookPos(Location loc, boolean t) {
 		int m = t ? 1 : -1;
+		if(loc.x < 8.5f || loc.z < 6.5f){
+			float nx = loc.x >= 8.5f ? loc.x : 8.5f;
+			float nz = loc.z >= 6.5f ? loc.z : 6.5f;
+		GL11.glTranslatef(nx * -1 * m, nz * -1 * m, 0);			
+		}else if(loc.x > mainclass.getWorld().getSizeX()-8.5f || loc.z < 6.5f){
+			float nx = loc.x <= mainclass.getWorld().getSizeX()-8.5f ? loc.x : mainclass.getWorld().getSizeX()-8.5f;
+			float nz = loc.z >= 6.5f ? loc.z : 6.5f;
+			GL11.glTranslatef(nx * -1 * m, nz * -1 * m, 0);			
+		}else if(loc.x < 8.5f || loc.z > mainclass.getWorld().getSizeZ()-6.5f){
+			float nx = loc.x >= 8.5f ? loc.x : 8.5f;
+			float nz = loc.z <= mainclass.getWorld().getSizeZ()-6.5f ? loc.z : mainclass.getWorld().getSizeZ()-6.5f;
+			GL11.glTranslatef(nx * -1 * m, nz * -1 * m, 0);			
+		}else if(loc.x > mainclass.getWorld().getSizeX()-8.5f || loc.z > mainclass.getWorld().getSizeZ()-6.5f){
+			float nx = loc.x <= mainclass.getWorld().getSizeX()-8.5f ? loc.x : mainclass.getWorld().getSizeX()-8.5f;
+			float nz = loc.z <= mainclass.getWorld().getSizeZ()-6.5f ? loc.z : mainclass.getWorld().getSizeZ()-6.5f;
+			GL11.glTranslatef(nx * -1 * m, nz * -1 * m, 0);			
+		}else
 		GL11.glTranslatef(loc.getX() * -1 * m, loc.getZ() * -1 * m, 0);
 	}
 
@@ -171,18 +188,14 @@ public class Render2D {
 					int[] objInt = (int[]) objs[0];
 				for(int i=objInt.length-1;i>=0;i--){
 					if(objInt[i] == -5){
-						lookPos(looking,false);
-						mainclass.getWorld().getPlayer().renderShadow(mainclass);
-						lookPos(looking,true);
+						mainclass.getWorld().getPlayer().renderShadow(mainclass,looking);
 					}else{
 							entityarray[objInt[i]].renderShadow(mainclass);
 					}
 				}
 				for(int i=objInt.length-1;i>=0;i--){
 					if(objInt[i] == -5){
-						lookPos(looking,false);
-						mainclass.getWorld().getPlayer().render(mainclass);
-						lookPos(looking,true);
+						mainclass.getWorld().getPlayer().render(mainclass,looking);
 					}else{
 							entityarray[objInt[i]].render(mainclass);
 					}
@@ -450,7 +463,7 @@ public class Render2D {
 			renderChar(m, 0, 0, s.toUpperCase().toCharArray()[xo]);
 			GL11.glTranslatef(-xo, 0, 0);
 		}
-	}
+	}//commentd
 
 	public static void renderChar(MainClass m, float x, float y, char c) {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -467,6 +480,11 @@ public class Render2D {
 		GL11.glVertex2f(x + 0f, y + 0f);
 		GL11.glEnd();
 
+	}
+	
+	public float measureString(String str)
+	{
+		return str.length() * 1.f;
 	}
 
 	public static ByteBuffer[] getIcons(String path) {
@@ -594,6 +612,63 @@ public class Render2D {
 				BufferTools.asFlippedFloatBuffer(new float[] { lightpos.x,
 						lightpos.z, h, angle }));
 	}
+
+	public static void day() {
+		setLight(GL11.GL_LIGHT0, new Location(0.5f, 0.5f), 25, 0);
+	}
+
+	public static void mid() {
+		setLight(GL11.GL_LIGHT0, new Location(0.5f, 0.5f), 25, 0);
+	}
+
+	public static void night() {
+		setLight(GL11.GL_LIGHT0, new Location(0.5f, 0.5f), 5, 1f);
+	}
+
 	
-	
+
+	public static void DrawText(Location textLoc, String text){
+		GL11.glTranslatef(textLoc.x, textLoc.z, 0f);
+		renderString(MainClass.classForRender,text);
+		GL11.glTranslatef(textLoc.x*-1f, textLoc.z*-1f, 0f);
+	}
+	public static  void DrawTexture(float x,float y,float w,float h){
+		//Update
+		glBegin(GL_QUADS);
+		GL11.glTexCoord2f(0f, 1f);
+		GL11.glVertex2f(x,y);
+		GL11.glTexCoord2f(1f, 1f);
+		GL11.glVertex2f(x+w,y);
+		GL11.glTexCoord2f(1f, 0f);
+		GL11.glVertex2f(x+w,y+h);
+		GL11.glTexCoord2f(0f, 0f);
+		GL11.glVertex2f(x,y+h);
+		GL11.glEnd();
+	}
+	public static  void DrawBox(float x,float y,float w,float h){
+		DrawLine(new Location(x,y),new Location(x+w,y));
+		DrawLine(new Location(x+w,y),new Location(x+w,y+h));
+		DrawLine(new Location(x+w,y+h),new Location(x,y+h));
+		DrawLine(new Location(x,y+h),new Location(x,y));
+	}
+	public static  void FillBox(float x,float y,float w,float h){
+		GL11.glBegin(GL11.GL_QUADS);
+		GL11.glVertex2f(x,y);
+		GL11.glVertex2f(x+w,y);
+		GL11.glVertex2f(x+w,y+h);
+		GL11.glVertex2f(x,y+h);
+		GL11.glEnd();
+	}
+	public static void setTexture(String s){	
+		if(s == null)glBindTexture(GL_TEXTURE_2D,0);
+		else
+			glBindTexture(GL_TEXTURE_2D, MainClass.classForRender.getPictureLoader()
+					.getImageAsInteger(s));}
+	public static  void DrawLine(Location loc1, Location loc2){
+			GL11.glBegin(GL11.GL_LINES);
+			GL11.glVertex2f(loc1.x, loc1.z);
+			GL11.glVertex2f(loc2.x, loc2.z);
+			GL11.glEnd();
+	}
+
 }
