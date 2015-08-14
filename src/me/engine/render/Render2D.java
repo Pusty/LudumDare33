@@ -594,17 +594,6 @@ public class Render2D {
 				BufferTools.asFlippedFloatBuffer(new float[] { lightpos.x,
 						lightpos.z, h, angle }));
 	}
-
-	public static void day() {
-		setLight(GL11.GL_LIGHT0, new Location(0.5f, 0.5f), 25, 0);
-	}
-
-	public static void mid() {
-		setLight(GL11.GL_LIGHT0, new Location(0.5f, 0.5f), 25, 0);
-	}
-
-	public static void night() {
-		setLight(GL11.GL_LIGHT0, new Location(0.5f, 0.5f), 5, 1f);
-	}
-
+	
+	
 }
