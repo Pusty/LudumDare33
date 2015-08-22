@@ -2,6 +2,7 @@ package me.engine.world;
 
 
 import me.engine.entity.Entity;
+import me.engine.entity.EntityLiving;
 import me.engine.entity.Particle;
 import me.engine.entity.Player;
 import me.engine.location.Location;
@@ -168,6 +169,8 @@ public class World {
 	public int getEntityArraySize() {
 	int i=0;
 	for(Entity e:getEntityArray())
+		if((e instanceof EntityLiving))
+			if(!((EntityLiving) e).isDead())
 		if(e!=null)i++;
 	return i;
 	}

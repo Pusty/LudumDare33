@@ -216,7 +216,7 @@ public class StartScreen {
 			Display.setDisplayMode(chosenMode);
 //			 Display.setVSyncEnabled(true);
 			Display.setFullscreen(false); // FULLSCREEn
-			Display.setTitle("LudumDare33Warmup");
+			Display.setTitle("LudumDare33");
 			Display.setIcon(Render2D.getIcons(System.getProperty("user.dir")
 					+ "\\img\\icon32.png"));
 

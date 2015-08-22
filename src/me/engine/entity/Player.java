@@ -25,8 +25,8 @@ public class Player extends EntityLiving {
 		super(m ,x, y,1f,1f);
 //		this.setMainItem(new Item(30));
 //		this.setUtilItem(new Item(31));
-		
-		setSkill(0,Inventory.skillByIndex((int)m.getSavedData().getData("skill")));
+//		setSkill(0,Inventory.skillByIndex((int)m.getSavedData().getData("skill")));
+		setSkill(0,Inventory.skillByIndex(4));
 	}
 	
 	public void setSkill(int id,Skill s){

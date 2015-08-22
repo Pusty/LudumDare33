@@ -9,9 +9,9 @@ import me.engine.entity.EntityPortal;
 import me.engine.entity.EntityTree;
 import me.engine.entity.NPCEntity;
 import me.engine.entity.Projectile;
-
 import me.engine.location.Location;
 import me.engine.world.Chunk;
+import me.engine.world.LevelScript;
 import me.game.main.StartClass;
 
 public class GameTickHandler {
@@ -160,9 +160,14 @@ int tickupdate=40;
 		if(ticks == tickupdate-1){
 			mainclass.getSavedData().putData("posX",mainclass.getWorld().getPlayer().getX());
 			mainclass.getSavedData().putData("posZ",mainclass.getWorld().getPlayer().getZ());
+			DialogClass.randomDialogTick(mainclass);
+			LevelScript
+			.getLevel((int)mainclass.getSavedData().getData("world"))
+			.mapTick(mainclass);
 		}
 //		if (mainclass.getWorld().getPlayer().getHealth() < 1)
 //			mainclass.setTimeRunning(false);
+		
 	}
 
 	public static boolean collision(Location b, float x, float z) {

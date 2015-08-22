@@ -16,6 +16,7 @@ import spy.gui.features.Form;
 import spy.gui.features.SkillInventory;
 import me.engine.location.Location;
 import me.engine.main.Controls;
+import me.engine.main.DialogClass;
 import me.engine.main.GameTickHandler;
 import me.engine.main.Inventory;
 import me.engine.main.MainClass;
@@ -28,10 +29,17 @@ import me.engine.render.AnimationHandler;
 import me.engine.render.Render2D;
 import me.engine.render.SheetLoader;
 import me.game.leveldesign.Level01;
+import me.game.leveldesign.Level02;
+import me.game.leveldesign.Level03;
+import me.game.leveldesign.Level04;
+import me.game.leveldesign.Level05;
+import me.game.leveldesign.Level06;
+import me.game.leveldesign.Level07;
+import me.game.leveldesign.Level08;
 
 public class StartClass extends MainClass {
 	public static boolean light=false;
-	public static boolean online=true;
+	public static boolean online=false;
 	public void preInit() {
 		SheetLoader sheetloader;
 		try {
@@ -117,6 +125,49 @@ public class StartClass extends MainClass {
 				System.out.println("Found BloodSlime");
 			} catch (Exception e) {
 			}
+			
+			try {
+				String folder = "chicken";
+				sheetloader = new SheetLoader(System.getProperty("user.dir")
+						+ "\\img\\" + folder + "\\chicken.png", 1, 4 * 4, 16, 16);
+				for (int a = 0; a < 4 * 4; a++) {
+					getPictureLoader()
+							.ImportFromSheet(folder + "_" + String.valueOf(a),
+									sheetloader, a, 0);
+				}
+				sheetloader = new SheetLoader(System.getProperty("user.dir")
+						+ "\\img\\" + folder + "\\chicken_death.png", 1, 4 * 4,
+						16, 16);
+				for (int a = 0; a < 4 * 4; a++) {
+					getPictureLoader().ImportFromSheet(
+							folder + "_death_" + String.valueOf(a),
+							sheetloader, a, 0);
+				}
+				System.out.println("Found Chicken");
+			} catch (Exception e) {
+			}
+			
+			try {
+				String folder = "goldchicken";
+				sheetloader = new SheetLoader(System.getProperty("user.dir")
+						+ "\\img\\" + folder + "\\goldchicken.png", 1, 4 * 4, 16, 16);
+				for (int a = 0; a < 4 * 4; a++) {
+					getPictureLoader()
+							.ImportFromSheet(folder + "_" + String.valueOf(a),
+									sheetloader, a, 0);
+				}
+				sheetloader = new SheetLoader(System.getProperty("user.dir")
+						+ "\\img\\" + folder + "\\goldchicken_death.png", 1, 4 * 4,
+						16, 16);
+				for (int a = 0; a < 4 * 4; a++) {
+					getPictureLoader().ImportFromSheet(
+							folder + "_death_" + String.valueOf(a),
+							sheetloader, a, 0);
+				}
+				System.out.println("Found Gold Chicken");
+			} catch (Exception e) {
+			}
+			
 
 			// Image img = ImageIO.read(new
 			// File(System.getProperty("user.dir")+"\\data\\"+"map_0"+".png"));
@@ -180,6 +231,20 @@ public class StartClass extends MainClass {
 								a, 0);
 				}catch(Exception e){};
 			}
+			
+			try {
+				Image img = ImageIO.read(new File(System.getProperty("user.dir")
+						+ "\\data\\map_" + 0 + ".png"));
+				 sheetloader = new SheetLoader(
+						System.getProperty("user.dir") + "\\data\\map_" + 0 + ".png",
+						1, img.getWidth(null) / 16, 16, 16);
+				for (int a = 0; a < (img.getWidth(null) / 16); a++) {
+					getPictureLoader().ImportFromSheet(
+							"block_" + String.valueOf(a), sheetloader, a, 0);
+				}
+			} catch (Exception e) {
+
+			}
 
 			
 			//Init animations
@@ -198,6 +263,14 @@ public class StartClass extends MainClass {
 			AnimationHandler.addHandler("slime", 2);
 			AnimationHandler.getHandler("slime").addAnimation("slime", "walk", 120, 1, true);
 			AnimationHandler.getHandler("slime").addAnimation("slime_death", "death", 120, 0, false);
+			
+			AnimationHandler.addHandler("chicken", 2);
+			AnimationHandler.getHandler("chicken").addAnimation("chicken", "walk", 120, 1, true);
+			AnimationHandler.getHandler("chicken").addAnimation("chicken_death", "death", 120, 0, false);
+
+			AnimationHandler.addHandler("goldchicken", 2);
+			AnimationHandler.getHandler("goldchicken").addAnimation("goldchicken", "walk", 120, 1, true);
+			AnimationHandler.getHandler("goldchicken").addAnimation("goldchicken_death", "death", 120, 0, false);
 			
 			AnimationHandler.addHandler("bloodslime", 2);
 			AnimationHandler.getHandler("bloodslime").addAnimation("bloodslime", "walk", 120, 1, true);
@@ -227,6 +300,9 @@ public class StartClass extends MainClass {
 
 			AnimationHandler.addHandler("par4", 1);
 			AnimationHandler.getHandler("par4").addAnimation("par4", "exist", 120, 0, true);
+			
+			AnimationHandler.addHandler("par5", 1);
+			AnimationHandler.getHandler("par5").addAnimation("par5", "exist", 120, 0, true);
 
 			for (int i = 0; i < 64; i++) {
 				HandledBlock b = new HandledBlock(i);
@@ -269,21 +345,9 @@ public class StartClass extends MainClass {
 	
 	public void load(int mapID) {
 		this.loadMap();
-		getTextLoader().addIndex();
+//		getTextLoader().addIndex();
 		this.setTimeRunning(false);
-		try {
-			Image img = ImageIO.read(new File(System.getProperty("user.dir")
-					+ "\\data\\map_" + mapID + ".png"));
-			SheetLoader sheetloader = new SheetLoader(
-					System.getProperty("user.dir") + "\\data\\map_" + mapID + ".png",
-					1, img.getWidth(null) / 16, 16, 16);
-			for (int a = 0; a < (img.getWidth(null) / 16); a++) {
-				getPictureLoader().ImportFromSheet(
-						"block_" + String.valueOf(a), sheetloader, a, 0);
-			}
-		} catch (Exception e) {
 
-		}
 
 		Render2D.chunkList = new int[1];
 		Render2D.chunkList[0] = 0;
@@ -294,6 +358,7 @@ public class StartClass extends MainClass {
 				+ ".txm");
 		
 		LevelScript levelscript = LevelScript.getLevel(mapID);
+		levelscript.init(this);
 		String line = "";
 		try {
 			if (!f.exists() || !f2.exists()) {
@@ -355,8 +420,7 @@ public class StartClass extends MainClass {
 								levelscript.addSpecial1(this,world,metaID,x,world.getSizeZ()-z-1);
 							else if(metaID == 7)
 								levelscript.addSpecial2(this,world,metaID,x,world.getSizeZ()-z-1);
-							
-							if(metaID > 7)
+							else if(metaID > 7)
 								levelscript.addPortal(this,world,metaID,x,world.getSizeZ()-z-1);
 							
 								x++;
@@ -385,6 +449,8 @@ public class StartClass extends MainClass {
 		this.setTimeRunning(true);
 		this.setLoaded();
 		getSavedData().saveToFile("player.txt");
+		
+		DialogClass.setDialog(this, mapID);
 	}
 
 	public static boolean rerender = false;
@@ -435,6 +501,13 @@ public class StartClass extends MainClass {
 	@Override
 	public void WorldInit() {
 		LevelScript.addLevel(1, new Level01());
+		LevelScript.addLevel(2, new Level02());
+		LevelScript.addLevel(3, new Level03());
+		LevelScript.addLevel(4, new Level04());
+		LevelScript.addLevel(5, new Level05());
+		LevelScript.addLevel(6, new Level06());
+		LevelScript.addLevel(7, new Level07());
+		LevelScript.addLevel(8, new Level08());
 	
 		getTextLoader().loadFromFile("loading.txt");
 		if(!this.getLoadGame())
@@ -445,8 +518,6 @@ public class StartClass extends MainClass {
 
 		load((int)getSavedData().getData("world"));
 
-		this.setDialog("Me",
-				"Where am I? What is this ? Why is everything smelling like cake ?");
 
 	}
 

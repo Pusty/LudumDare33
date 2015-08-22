@@ -52,7 +52,23 @@ public class Render2D {
 			
 		}else{ex=ex+1.5f;}
 		if(mainclass.getFullscreen())ex=ex+1f;
-		if(loc.x < (8.5f+ex) || loc.z < 6.5f){
+		if(loc.x < (8.5f+ex) && loc.z < 6.5f){
+			float nx = loc.x >= (8.5f+ex) ? loc.x : (8.5f+ex);
+			float nz = loc.z >= 6.5f ? loc.z : 6.5f;
+		GL11.glTranslatef(nx * -1 * m, nz * -1 * m, 0);			
+		}else if(loc.x > mainclass.getWorld().getSizeX()-(8.5f+ex) && loc.z < 6.5f){
+			float nx = loc.x <= mainclass.getWorld().getSizeX()-(8.5f+ex) ? loc.x : mainclass.getWorld().getSizeX()-(8.5f+ex);
+			float nz = loc.z >= 6.5f ? loc.z : 6.5f;
+			GL11.glTranslatef(nx * -1 * m, nz * -1 * m, 0);			
+		}else if(loc.x < (8.5f+ex) && loc.z > mainclass.getWorld().getSizeZ()-6.5f){
+			float nx = loc.x >= (8.5f+ex) ? loc.x : (8.5f+ex);
+			float nz = loc.z <= mainclass.getWorld().getSizeZ()-6.5f ? loc.z : mainclass.getWorld().getSizeZ()-6.5f;
+			GL11.glTranslatef(nx * -1 * m, nz * -1 * m, 0);			
+		}else if(loc.x > mainclass.getWorld().getSizeX()-(8.5f+ex)&& loc.z > mainclass.getWorld().getSizeZ()-6.5f){
+			float nx = loc.x <= mainclass.getWorld().getSizeX()-(8.5f+ex) ? loc.x : mainclass.getWorld().getSizeX()-(8.5f+ex);
+			float nz = loc.z <= mainclass.getWorld().getSizeZ()-6.5f ? loc.z : mainclass.getWorld().getSizeZ()-6.5f;
+			GL11.glTranslatef(nx * -1 * m, nz * -1 * m, 0);			
+		}else if(loc.x < (8.5f+ex) || loc.z < 6.5f){
 			float nx = loc.x >= (8.5f+ex) ? loc.x : (8.5f+ex);
 			float nz = loc.z >= 6.5f ? loc.z : 6.5f;
 		GL11.glTranslatef(nx * -1 * m, nz * -1 * m, 0);			
@@ -114,7 +130,7 @@ public class Render2D {
 			
 			//RERENDER
 			if (StartClass.rerender == true) {
-				mainclass.getPictureLoader().reloadTexture();
+//				mainclass.getPictureLoader().reloadTexture();
 				StartClass.rerender = false;
 			}
 			
@@ -538,7 +554,7 @@ public class Render2D {
 			Display.setDisplayMode(chosenMode);
 			 Display.setVSyncEnabled(mainclass.getVSync());
 			Display.setFullscreen(mainclass.getFullscreen()); // FULLSCREEn
-			Display.setTitle("8bitLooter");
+			Display.setTitle("LudumDare33");
 
 			Display.setIcon(getIcons(System.getProperty("user.dir")
 					+ "\\img\\icon32.png"));

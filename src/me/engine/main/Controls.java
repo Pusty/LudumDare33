@@ -187,10 +187,10 @@ public class Controls {
 					mainclass.getGui().click(mainclass, mx, mz);
 				}else if(mainclass.getWorld().getPlayer().getHealth() <= 0){
 					restart(mainclass);
-				}else
+				}
 //				mainclass.getSavedData().printOutAll();
 				mousePressed=true;
-			}else if(!Mouse.isButtonDown(0)){
+			}else if(!Mouse.isButtonDown(0) && mousePressed){
 				mousePressed=false;
 			}
 
@@ -289,16 +289,19 @@ public class Controls {
 
 	public static void restart(MainClass m){
 		m.getWorld().getPlayer().setHealth(m.getWorld().getPlayer().getStartHealth());
-		m.getSavedData().putData("worldOld",(int)m.getSavedData().getData("world"));
+		m.getSavedData().putData("worldOld",(int)m.getSavedData().getData("world")-1);
 		m.getSavedData().putData("world",(int)m.getSavedData().getData("world"));
 		((StartClass) m).load((int)m.getSavedData().getData("world"));
-		
-		Location to=new Location(0,0);
+		m.getSavedData().putData("worldOld",(int)m.getSavedData().getData("world"));
+	/*	Location to=new Location(0,0);
 		for(Entity e:m.getWorld().getEntityArray()){
 			if(e==null || !(e instanceof EntityPortal))continue;
-			if(((EntityPortal)e).isFrom() && ((EntityPortal)e).getPortal() == (int)m.getSavedData().getData("worldOld"))to = e.getLocation().clone();
+			System.out.println(((EntityPortal)e).getPortal());
+			if(((EntityPortal)e).getPortal() == (int)m.getSavedData().getData("world")){
+				to = e.getLocation().clone();
+			}
 		}
-		m.getWorld().getPlayer().getLocation().set(to);
+		m.getWorld().getPlayer().getLocation().set(to);*/
 	}
 	
 

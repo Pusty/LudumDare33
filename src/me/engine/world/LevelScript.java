@@ -14,6 +14,9 @@ public class LevelScript {
 	public LevelScript(int map){
 		mapID=map;
 	}
+	public void init(MainClass m){
+		
+	}
 	public void addTree(MainClass m ,World w, int metaID, int x, int z) {
 		w.addEntity(new EntityTree(m,x,z));
 	}
@@ -30,7 +33,10 @@ public class LevelScript {
 
 	}
 	public void addPortal(MainClass m ,World w, int metaID, int x, int z) {
+		if(metaID-7!=mapID)
 		w.addEntity(new EntityPortal(m,x,z,metaID-7==mapID,metaID-7,true));
+	}
+	public void mapTick(MainClass m){
 		
 	}
 	
