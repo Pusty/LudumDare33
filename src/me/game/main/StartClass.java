@@ -217,6 +217,13 @@ public class StartClass extends MainClass {
 			
 			
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
+					+ "\\img\\feather.png", 1, 4, 16, 16);
+			for (int a = 0; a < 4; a++)
+				getPictureLoader().ImportFromSheet("feather_" + a, sheetloader,
+						a, 0);
+			
+			
+			sheetloader = new SheetLoader(System.getProperty("user.dir")
 					+ "\\img\\portal.png", 1, 4, 16, 16);
 			for (int a = 0; a < 4; a++)
 				getPictureLoader().ImportFromSheet("portal_" + a, sheetloader,
@@ -284,6 +291,9 @@ public class StartClass extends MainClass {
 			
 			AnimationHandler.addHandler("blood", 1);
 			AnimationHandler.getHandler("blood").addAnimation("blood", "exist", 120, 1, true);
+			
+			AnimationHandler.addHandler("feather", 1);
+			AnimationHandler.getHandler("feather").addAnimation("feather", "exist", 120, 1, true);
 			
 			
 			AnimationHandler.addHandler("par0", 1);

@@ -36,6 +36,7 @@ public class SavedData {
 		putData("worldOld",0);
 		putData("skill",0);
 		putData("dialog",0);
+		putData("chicken",0);
 		putData("inv","0&Fireball%1&Smash%2&Bloodball%3&Potion%3&Potion%3&Potion");
 		loaded=true;
 	}

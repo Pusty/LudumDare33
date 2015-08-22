@@ -1,0 +1,9 @@
+posX/8.150019
+inv/0&Fireball%1&Smash%2&Bloodball
+dialog/3
+posZ/8.4250145
+chicken/2
+world/3
+skill/4
+health/10
+worldOld/3

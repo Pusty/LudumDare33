@@ -1,0 +1,3 @@
+C:\Users\Leif\git\LudumDare33\map\map_3#tiles.png
+C:\Users\Leif\git\LudumDare33\map\map_3.tlc
+C:\Users\Leif\git\LudumDare33\map\map_3#map001.txm
