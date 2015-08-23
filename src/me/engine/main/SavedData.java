@@ -34,10 +34,11 @@ public class SavedData {
 		putData("posZ",-1f);
 		putData("world",1);
 		putData("worldOld",0);
-		putData("skill",0);
+		putData("skill",4);
 		putData("dialog",0);
 		putData("chicken",0);
-		putData("inv","0&Fireball%1&Smash%2&Bloodball%3&Potion%3&Potion%3&Potion");
+		putData("block",0);
+		putData("inv","3&Potion");
 		loaded=true;
 	}
 	
@@ -92,9 +93,11 @@ public class SavedData {
 						if(line.contains("/")){
 							try{putData(line.split("/")[0],Integer.parseInt(line.split("/")[1]));}catch(Exception e){
 								try{putData(line.split("/")[0],Float.parseFloat(line.split("/")[1]));}catch(Exception e2){
+									try{
 									if(line.split("/")[1].equalsIgnoreCase("true"))putData(line.split("/")[0],true);
 									else if(line.split("/")[1].equalsIgnoreCase("false"))putData(line.split("/")[0],false);
 								putData(line.split("/")[0],line.split("/")[1]);
+									}catch(Exception e4){	putData(line.split("/")[0],"null");}
 										
 								}	
 							}

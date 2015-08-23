@@ -4,6 +4,7 @@ package me.engine.entity;
 import java.util.Random;
 
 import me.engine.location.Location;
+import me.engine.main.Inventory;
 import me.engine.main.MainClass;
 import me.engine.skill.SkillBloodball;
 
@@ -46,10 +47,21 @@ public class EntityBloodSlime extends EntityMonster {
 		s = s + "\n";
 		return s;
 	}
-
+	public void death(MainClass m){
+		if((int)m.getSavedData().getData("chicken") > 0)
+		m.getWorld().getPlayer().setSkill(0, Inventory.skillByIndex(2));
+	}
 
 	public void tick(MainClass m){
+		Location player  = m.getWorld().getPlayer().getLocation();
+		if(Math.abs(player.x - this.getX()) < 2f || Math.abs(player.z - this.getZ()) < 2f ){
+			if((player.x - this.getX() < 0 && player.x - this.getX() > -2f && side==0)
+				|| (player.x - this.getX() > 0 && player.x - this.getX() < 2f && side==1)
+				|| (player.z - this.getZ() < 0 && player.z - this.getX() > -2f && side==3)
+				|| (player.z - this.getZ() > 0 && player.z - this.getZ() < 2f && side==2)
+				)
 			addStatus("SKILL1",999999,false);
+		}
 		super.tick(m);
 	}
 	protected EntityBloodSlime() {/* USED FOR DUMMY */

@@ -1,5 +1,6 @@
 package me.engine.skill;
 
+import me.engine.entity.EntityGoal;
 import me.engine.entity.EntityLiving;
 import me.engine.entity.Particle;
 import me.engine.entity.Projectile;
@@ -62,6 +63,15 @@ public class SkillBloodball extends Skill {
 			if(health>after)
 			m.getWorld().addParticle(new Particle(hit.getX(),hit.getZ(),80,new Velocity(0,0),4));
 		
+		}
+		return false;
+	}
+	
+	public boolean projectileHitGoal(MainClass m,Projectile p,EntityGoal hit){
+		if(Location.getDistance(p.getLocation(), hit.getLocation()) < 1f){
+			hit.setHit(true);
+			m.getWorld().addParticle(new Particle(hit.getX(),hit.getZ(),80,new Velocity(0,0),4));
+		return true;
 		}
 		return false;
 	}

@@ -14,11 +14,13 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import me.engine.entity.EntityLiving;
 import me.engine.entity.Particle;
 import me.engine.location.Location;
 import me.engine.text.TextPopup;
 import me.engine.util.Sorter;
 import me.engine.world.Chunk;
+import me.engine.world.LevelScript;
 import me.engine.entity.Entity;
 import me.engine.main.GameTickHandler;
 import me.engine.main.Inventory;
@@ -44,7 +46,7 @@ public class Render2D {
 	public Render2D(MainClass m) {
 		mainclass = m;
 	}
-
+int creditsindex=0;
 	public void lookPos(Location loc, boolean t) {
 		int m = t ? 1 : -1;
 		float ex = 0f;
@@ -120,7 +122,7 @@ public class Render2D {
 			//SETUP CAM
 			GL11.glTranslatef(-0.0f, 0.0f, camdis);
 			
-			
+			creditsindex=0;
 
 			Location looking = 
 					mainclass.getWorld().getPlayer().getLocation().clone();
@@ -169,7 +171,7 @@ public class Render2D {
 					for(int i = 0; i < mainclass.getWorld().getParticleArray().length;i++){
 						Particle p = mainclass.getWorld().getParticleArray()[i];
 						if(p == null)continue;
-						if(GameTickHandler.inRange(mainclass.getWorld().getPlayer().getLocation(), p.getLocation(), 20)){
+						if(GameTickHandler.inRange(mainclass.getWorld().getPlayer().getLocation(), p.getLocation(), 13)){
 							p.render(mainclass);
 						}
 					}
@@ -177,19 +179,29 @@ public class Render2D {
 				{
 				//SORT HERE
 					Object[] objs = Sorter.sortEntitys(entityarray,
-									looking.getZ());
+									looking.getZ(),mainclass.getWorld().getBoss()==null?-5f:mainclass.getWorld().getBoss().getZ());
 					int[] objInt = (int[]) objs[0];
 				for(int i=objInt.length-1;i>=0;i--){
 					if(objInt[i] == -5){
 						mainclass.getWorld().getPlayer().renderShadow(mainclass,looking);
+					}else if(objInt[i] == -4){
+						if(mainclass.getWorld().getBoss()!=null)
+							mainclass.getWorld().getBoss().renderShadow(mainclass);
 					}else{
+						if(GameTickHandler.inRange(mainclass.getWorld().getPlayer().getLocation(),
+								entityarray[objInt[i]].getLocation(), 13))
 							entityarray[objInt[i]].renderShadow(mainclass);
 					}
 				}
 				for(int i=objInt.length-1;i>=0;i--){
 					if(objInt[i] == -5){
 						mainclass.getWorld().getPlayer().render(mainclass,looking);
+					}else if(objInt[i] == -4){
+						if(mainclass.getWorld().getBoss()!=null)
+							mainclass.getWorld().getBoss().render(mainclass);
 					}else{
+						if(GameTickHandler.inRange(mainclass.getWorld().getPlayer().getLocation(),
+								entityarray[objInt[i]].getLocation(), 13))
 							entityarray[objInt[i]].render(mainclass);
 					}
 				}
@@ -219,6 +231,17 @@ public class Render2D {
 				 renderImage(mainclass,"item_16");
 			GL11.glTranslatef(0.75f, 0f, 0f);
 			 }
+				GL11.glTranslatef(-0.75f * health, 0f, 0f);
+				 GL11.glTranslatef(0f, -8f, 0f);
+				 EntityLiving bossindex = mainclass.getWorld().getBoss();
+				 if(bossindex!=null){
+				 health = bossindex.getHealth();
+				 for(int i=0;i<health;i++){
+					 renderImage(mainclass,"item_16");
+					 GL11.glTranslatef(0.75f, 0f, 0f);
+				 }
+				 }
+			 
 			GL11.glPopMatrix();
 			
 			if(mainclass.getGui() != null){
@@ -249,6 +272,7 @@ public class Render2D {
 
 	
 		}else{
+			if((int)mainclass.getSavedData().getData("world")!=9){
 			mainclass.addLoading();
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			GL11.glLoadIdentity();
@@ -272,8 +296,49 @@ public class Render2D {
 			
 			Display.update();
 			Display.sync(60);
+			}else{
+				String[] credits = {"Credits:"
+						,"Ludum Dare 33: A Foxs Journey"
+						,"A Game created by Pusty and DEADspy"
+						,"Game Engine: Pusty"
+						,"Grafical User Interface: DEADspy"
+						,"Grafics: Pusty"
+						,"Music: DEADspy"
+						,"Game written in Java"
+						,"Framework: LWJGL"
+						,"------------"
+						,"Thanks for playing this game! :D"
+						,"THE END"};
+				if(mainclass.mapLoadingInt()){
+					creditsindex=creditsindex+1;
+					if(creditsindex>=credits.length)creditsindex=credits.length-1;
+					mainclass.loadMap(150);
+				}
+				mainclass.addLoading();
+				GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+				GL11.glLoadIdentity();
+				GL11.glTranslatef(-0.0f, 0.0f, -42);
+				String text1 = "Credits";
+				String text2 = credits[creditsindex];
+				String text3 = ". . .";
+				int time = mainclass.getMapLoading();
+				int t = time/10;
+				for(int i=0;i<t%3;i++)
+					text3 = text3+" .";
+				GL11.glTranslatef(-text1.length()/2f, 0f, 0f);
+				renderString(mainclass,text1);
+				GL11.glTranslatef(-text2.length()/2f + text1.length()/2f, -1f, 0f);
+				renderString(mainclass,text2);
+				GL11.glTranslatef(-text3.length()/2f + text2.length()/2f, -1f, 0f);
+				renderString(mainclass,text3);
+				
+				Display.update();
+				Display.sync(60);
+				
+			}
 		}
 		}
+		if(Render2D.chunkList!=null)
 		for (int index = 0; index < Render2D.chunkList.length; index++)
 			GL11.glDeleteLists(Render2D.chunkList[index], 1);
 		mainclass.getSoundPlayer().removeALData();
@@ -321,7 +386,7 @@ public class Render2D {
 
 			GL11.glTranslatef(0f, -0.5f, 0f);
 			GL11.glScalef(0.5f, 0.5f, 0f);
-			renderString(mainclass, from);
+//			renderString(mainclass, from);
 			GL11.glScalef(2f, 2f, 0f);
 			GL11.glTranslatef(-0f, 0.5f, 0f);
 
@@ -330,8 +395,9 @@ public class Render2D {
 			String curtext = "";
 			int curindex = 0;
 			for (String p : parts) {
+				p=p.trim();
 				curindex = curindex + p.length();
-				if (curindex < 12) {
+				if (curindex < 10) {
 					curtext = curtext + p + " ";
 				} else {
 					curindex = 0;
@@ -554,7 +620,7 @@ public class Render2D {
 			Display.setDisplayMode(chosenMode);
 			 Display.setVSyncEnabled(mainclass.getVSync());
 			Display.setFullscreen(mainclass.getFullscreen()); // FULLSCREEn
-			Display.setTitle("LudumDare33");
+			Display.setTitle("LudumDare33 - A Fox's Journey");
 
 			Display.setIcon(getIcons(System.getProperty("user.dir")
 					+ "\\img\\icon32.png"));

@@ -13,6 +13,7 @@ public class World {
 	int sizez;
 	int sizee;
 	Entity[] entityarray;
+	EntityLiving bossentity;
 	Particle[] particlearray;
 	Chunk[] chunkarray;
 	Player player;
@@ -35,7 +36,8 @@ public class World {
 		particlearray = new Particle[se];
 //		entityarray[0] = new NPCEntity(m,0,0,"player3");
 	}
-
+	public EntityLiving getBoss(){return bossentity;}
+	public void setBoss(EntityLiving e){bossentity=e;}
 	public boolean isDay(){return day;}
 	public void setDay(boolean b){day=b;}
 	public boolean isEditor(){return editor;}

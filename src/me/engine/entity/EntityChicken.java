@@ -4,11 +4,12 @@ package me.engine.entity;
 import java.util.Random;
 
 import me.engine.location.Location;
+import me.engine.main.Inventory;
 import me.engine.main.MainClass;
 import me.engine.skill.SkillBloodball;
 
 public class EntityChicken extends EntityMonster {
-	public EntityChicken(MainClass m, int x, int y) {
+	public EntityChicken(MainClass m, float x, float y) {
 		super(m, x, y, "chicken");
 //		setSkill(0,new SkillBloodball());
 	}
@@ -47,7 +48,10 @@ public class EntityChicken extends EntityMonster {
 		return s;
 	}
 
-
+	public void death(MainClass m){
+		if((int)m.getSavedData().getData("chicken") > 0)
+		m.getWorld().getPlayer().setSkill(0, Inventory.skillByIndex(4));
+	}
 	public void tick(MainClass m){
 //			addStatus("SKILL1",999999,false);
 		super.tick(m);
@@ -93,6 +97,7 @@ public class EntityChicken extends EntityMonster {
 	public void render(MainClass m){
 		super.render(m);
 	}
+	
 	
 	
 }

@@ -12,7 +12,7 @@ public class ProjectileFlame extends Projectile{
 		super(m,x,y,v,skill);
 	}	
 	protected ProjectileFlame(){/*USED FOR DUMMY*/}
-	
+	int maxticks=10;
 	public Entity createByString(MainClass m,String s,String split){
 		Entity e = null;
 		System.out.println("Initing "+getName());
@@ -32,6 +32,11 @@ public class ProjectileFlame extends Projectile{
 	public String getTextureName(int i){return "flame";}
 	public void tick(MainClass m){
 		m.getWorld().addParticle(new Particle(getX(),getZ(),80,new Velocity(0,0),2));
+		
+		if(maxticks>0)
+		maxticks--;
+		else
+		m.getWorld().removeEntity(this);
 	}
 	public void hit(MainClass m){
 		m.getWorld().addParticle(new Particle(getX(),getZ(),80,new Velocity(0,0),1));

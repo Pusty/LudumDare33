@@ -4,6 +4,7 @@ import me.engine.render.Render2D;
 import me.engine.skill.Skill;
 import me.engine.skill.SkillBite;
 import me.engine.skill.SkillBloodball;
+import me.engine.skill.SkillFeather;
 import me.engine.skill.SkillFireball;
 import me.engine.skill.SkillSmash;
 import me.engine.skill.SkillSummon;
@@ -14,6 +15,7 @@ public class Inventory {
 		if(skills.length()<1)return;
 		String[] inv = skills.split("%");
 		if(inv.length<=in)return;
+		try{
 		int ind = Integer.parseInt(inv[in].split("&")[0]);
 //		String name = inv[in].split("&")[1];
 		
@@ -34,6 +36,7 @@ public class Inventory {
 		default:
 			removeItem(m,in);
 		}
+		}catch(Exception e){}
 	}
 	
 	public static Skill skillByIndex(int in){
@@ -42,6 +45,7 @@ public class Inventory {
 		else if(in == 2)return new SkillBloodball();
 		else if(in == 3)return new SkillSummon();
 		else if(in == 4)return new SkillBite();
+		else if(in == 5)return new SkillFeather();
 		return null;
 	}
 	public static int indexBySkill(Skill s){
@@ -50,6 +54,7 @@ public class Inventory {
 		else if(s instanceof SkillBloodball)return 2;
 		else if(s instanceof SkillSummon)return 3;
 		else if(s instanceof SkillBite)return 4;
+		else if(s instanceof SkillFeather)return 5;
 		return -1;
 	}
 	
@@ -60,6 +65,7 @@ public class Inventory {
 		else if(in == 2)texture="blood_1";
 		else if(in == 3)texture="slime_0_1";
 		else if(in == 4)texture="par5_1";
+		else if(in == 5)texture="chicken_death_3";
 		Render2D.renderImage(m, texture);
 	}
 	

@@ -93,7 +93,7 @@ public class StartScreen {
 	private void render() throws LWJGLException{
 		if(side == 0){
 		Render2D.renderText(picloader, "Start",new Location(-3,1.5f),5f/10f);
-		Render2D.renderText(picloader, "Server",new Location(-3,0f),5f/10f);
+//		Render2D.renderText(picloader, "Server",new Location(-3,0f),5f/10f);
 		Render2D.renderText(picloader, "Option",new Location(-3,-1.5f),5f/10f);
 		}else if(side == 1){
 		String res = "R: "+screenX+"/"+screenY;
@@ -108,8 +108,8 @@ public class StartScreen {
 		Render2D.renderText(picloader, sound,new Location(-3,0f),5f/sound.length());
 		Render2D.renderText(picloader, "Next",new Location(-3,-1.5f),5f/10f);
 		}else if(side == 3){
-			String text = "Server";
-		Render2D.renderText(picloader, text,new Location(-3,1.5f),5f/text.length());
+//			String text = "Server";
+//		Render2D.renderText(picloader, text,new Location(-3,1.5f),5f/text.length());
 		}else if(side == -1){
 			String f1 = "Play Game";
 			String f2 = "New Game";
@@ -131,7 +131,7 @@ public class StartScreen {
 			ticks=5;
 			
 				 if(buttonindex == 0){side=-1;}
-			else if(buttonindex == 1){side=3;this.startServer();}
+//			else if(buttonindex == 1){side=3;this.startServer();}
 			else if(buttonindex == 2){side=1;}
 			
 			else if(buttonindex == 3){
@@ -216,7 +216,7 @@ public class StartScreen {
 			Display.setDisplayMode(chosenMode);
 //			 Display.setVSyncEnabled(true);
 			Display.setFullscreen(false); // FULLSCREEn
-			Display.setTitle("LudumDare33");
+			Display.setTitle("LudumDare33 - A Fox's Journey");
 			Display.setIcon(Render2D.getIcons(System.getProperty("user.dir")
 					+ "\\img\\icon32.png"));
 

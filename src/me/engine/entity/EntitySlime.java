@@ -5,7 +5,7 @@ package me.engine.entity;
 import java.util.Random;
 
 import me.engine.location.Location;
-
+import me.engine.main.Inventory;
 import me.engine.main.MainClass;
 import me.engine.skill.SkillSmash;
 
@@ -65,7 +65,12 @@ public class EntitySlime extends EntityMonster {
 	public String getName() {
 		return "Slime";
 	}
-
+	public void death(MainClass m){
+		if((int)m.getSavedData().getData("chicken") > 0)
+		m.getWorld().getPlayer().setSkill(0, Inventory.skillByIndex(1));
+		if(random.nextInt(5)==0)
+		m.getWorld().addEntity(new EntityItem(m,this.getX()+random.nextFloat(),this.getZ()+random.nextFloat()));
+	}
 	
 	Random random = new Random();
 

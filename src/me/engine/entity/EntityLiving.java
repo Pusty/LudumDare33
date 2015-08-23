@@ -24,6 +24,7 @@ public class EntityLiving extends Entity {
 	int health;
 	MainClass main;
 	Skill[] skills;
+	boolean death;
 	public EntityLiving(MainClass m,float x, float y, float sx, float sy) {
 		super(x, y, sx, sy);
 		main=m;
@@ -38,6 +39,7 @@ public class EntityLiving extends Entity {
 		coints = 0;
 		health = getStartHealth();
 		skills=new Skill[2];
+		death=false;
 	}
 	public void setSkill(int id,Skill s){skills[id]=s;}
 	public Skill getSkill(int id){return skills[id];}
@@ -385,9 +387,13 @@ public class EntityLiving extends Entity {
 		down=true;
 		return true;
 	}
-	
+	public void death(MainClass m){}
 	public void tick(MainClass m){
 	//TICK Entity SKILLS AND SO ON	
+		if(this.getHealth()==0 && !death){
+			death(m);
+			death=true;
+		}
 	if(getHealth()>0){
 		if(hasEffect("SKILL1")>9999){
 			this.removeEffect("SKILL1");

@@ -95,8 +95,8 @@ public class SkillInventory extends IPanel
 		for(int i=0;i<4;i++){
 			renderButton(MainClass.classForRender,i,i==skillIndex,show[i]);
 		}
-		renderButton(MainClass.classForRender,-1,-1==buttonIndex,"///");
-		renderButton(MainClass.classForRender,4,4==buttonIndex,"///");
+		renderButton(MainClass.classForRender,-1,-1==buttonIndex,"");
+		renderButton(MainClass.classForRender,4,4==buttonIndex,"");
 	
 	}
 
@@ -168,12 +168,29 @@ public class SkillInventory extends IPanel
 		GL11.glPushMatrix();
 		GL11.glTranslatef(m_location.x+0.5f, m_location.z+0.5f, 0f);
 		GL11.glTranslatef(0f, -2f*i, 0);
+		if(i != -1 && i != 4){
 		if((b && i >= 0 && i < 4) || ((i==-1 || i==4 ) && b && timer > 0))
 			glBindTexture(GL_TEXTURE_2D,
 					m.getPictureLoader().getImageAsInteger("item_8"));
 		else
 			glBindTexture(GL_TEXTURE_2D,
 					m.getPictureLoader().getImageAsInteger("item_0"));
+		}else if(i == -1){
+			if((b && i >= 0 && i < 4) || ((i==-1 || i==4 ) && b && timer > 0))
+				glBindTexture(GL_TEXTURE_2D,
+						m.getPictureLoader().getImageAsInteger("item_9"));
+			else
+				glBindTexture(GL_TEXTURE_2D,
+						m.getPictureLoader().getImageAsInteger("item_1"));
+		}else if(i == 4){
+			if((b && i >= 0 && i < 4) || ((i==-1 || i==4 ) && b && timer > 0))
+				glBindTexture(GL_TEXTURE_2D,
+						m.getPictureLoader().getImageAsInteger("item_10"));
+			else
+				glBindTexture(GL_TEXTURE_2D,
+						m.getPictureLoader().getImageAsInteger("item_2"));
+		}
+		if(i != -1 && i != 4){
 		glBegin(GL_QUADS);
 		GL11.glTexCoord2f(0f, 1f);
 		GL11.glVertex2f(0f,m_size.z);
@@ -184,9 +201,20 @@ public class SkillInventory extends IPanel
 		GL11.glTexCoord2f(0f, 0f);
 		GL11.glVertex2f(0f,0f);	
 		glEnd(); 
-
 		GL11.glTranslatef(5f- text.length()/2f,0.5f,0f);
 		Render2D.renderString(m, text);
+		}else{
+			glBegin(GL_QUADS);
+			GL11.glTexCoord2f(0f, 1f);
+			GL11.glVertex2f(m_size.x/2 - m_size.x/4,m_size.z);
+			GL11.glTexCoord2f(1f, 1f);
+			GL11.glVertex2f(m_size.x/2 + m_size.x/4,m_size.z);
+			GL11.glTexCoord2f(1f, 0f);
+			GL11.glVertex2f(m_size.x/2 + m_size.x/4,0f);
+			GL11.glTexCoord2f(0f, 0f);
+			GL11.glVertex2f(m_size.x/2 - m_size.x/4 ,0f);	
+			glEnd(); 	
+		}
 		GL11.glPopMatrix();
 	}
 }

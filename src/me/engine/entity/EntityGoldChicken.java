@@ -4,12 +4,13 @@ package me.engine.entity;
 import java.util.Random;
 
 import me.engine.location.Location;
+import me.engine.main.Inventory;
 import me.engine.main.MainClass;
 import me.engine.skill.SkillBloodball;
 import me.engine.skill.SkillFeather;
 
 public class EntityGoldChicken extends EntityMonster {
-	public EntityGoldChicken(MainClass m, int x, int y) {
+	public EntityGoldChicken(MainClass m, float x, float y) {
 		super(m, x, y, "goldchicken");
 		setSkill(0,new SkillFeather());
 	}
@@ -48,15 +49,26 @@ public class EntityGoldChicken extends EntityMonster {
 		return s;
 	}
 
-	boolean death=false;
+
+	public void death(MainClass m){
+		int in = (int)m.getSavedData().getData("chicken");
+		in++;
+		m.getSavedData().putData("chicken",in);
+		m.getWorld().getPlayer().setSkill(0, Inventory.skillByIndex(5));
+		
+		if(m.getWorld().getBoss()!=null)
+			m.getWorld().getBoss().damage(1, false);
+	}
 	public void tick(MainClass m){
-		if(this.getHealth()==0 && !death){
-			int in = (int)m.getSavedData().getData("chicken");
-			in++;
-			m.getSavedData().putData("chicken",in);
-			death=true;
-		}
+		Location player  = m.getWorld().getPlayer().getLocation();
+		if(Math.abs(player.x - this.getX()) < 2f || Math.abs(player.z - this.getZ()) < 2f ){
+			if((player.x - this.getX() < 0 && player.x - this.getX() > -2f && side==0)
+				|| (player.x - this.getX() > 0 && player.x - this.getX() < 2f && side==1)
+				|| (player.z - this.getZ() < 0 && player.z - this.getX() > -2f && side==3)
+				|| (player.z - this.getZ() > 0 && player.z - this.getZ() < 2f && side==2)
+				)
 			addStatus("SKILL1",999999,false);
+		}
 		super.tick(m);
 	}
 	protected EntityGoldChicken() {/* USED FOR DUMMY */
@@ -88,7 +100,6 @@ public class EntityGoldChicken extends EntityMonster {
 
 		}
 	}
-	
 	public void addRender(){
 		if(getAnimation().currentanimation != 0 || moving)
 		getAnimation().getCurA().addTick();

@@ -168,6 +168,27 @@ public class StartClass extends MainClass {
 			} catch (Exception e) {
 			}
 			
+			
+			try {
+				String folder = "bombchicken";
+				sheetloader = new SheetLoader(System.getProperty("user.dir")
+						+ "\\img\\" + folder + "\\bombchicken.png", 1, 4 * 4, 16, 16);
+				for (int a = 0; a < 4 * 4; a++) {
+					getPictureLoader()
+							.ImportFromSheet(folder + "_" + String.valueOf(a),
+									sheetloader, a, 0);
+				}
+				sheetloader = new SheetLoader(System.getProperty("user.dir")
+						+ "\\img\\" + folder + "\\bombchicken_death.png", 1, 4 * 4,
+						16, 16);
+				for (int a = 0; a < 4 * 4; a++) {
+					getPictureLoader().ImportFromSheet(
+							folder + "_death_" + String.valueOf(a),
+							sheetloader, a, 0);
+				}
+				System.out.println("Found Bomb Chicken");
+			} catch (Exception e) {
+			}
 
 			// Image img = ImageIO.read(new
 			// File(System.getProperty("user.dir")+"\\data\\"+"map_0"+".png"));
@@ -202,6 +223,10 @@ public class StartClass extends MainClass {
 					System.getProperty("user.dir") + "\\img\\shadow.png");
 			getPictureLoader().addImage("tree",
 					System.getProperty("user.dir") + "\\img\\tree.png");
+			getPictureLoader().addImage("goal",
+					System.getProperty("user.dir") + "\\img\\goal.png");
+			getPictureLoader().addImage("goal_hit",
+					System.getProperty("user.dir") + "\\img\\goal_hit.png");
 
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
 					+ "\\img\\flame.png", 1, 4, 16, 16);
@@ -220,6 +245,25 @@ public class StartClass extends MainClass {
 					+ "\\img\\feather.png", 1, 4, 16, 16);
 			for (int a = 0; a < 4; a++)
 				getPictureLoader().ImportFromSheet("feather_" + a, sheetloader,
+						a, 0);
+			
+			
+			sheetloader = new SheetLoader(System.getProperty("user.dir")
+					+ "\\img\\health.png", 1, 4, 16, 16);
+			for (int a = 0; a < 4; a++)
+				getPictureLoader().ImportFromSheet("health_" + a, sheetloader,
+						a, 0);
+			
+			sheetloader = new SheetLoader(System.getProperty("user.dir")
+					+ "\\img\\blockM.png", 1, 4, 16, 16);
+			for (int a = 0; a < 4; a++)
+				getPictureLoader().ImportFromSheet("blockmove_" + a, sheetloader,
+						a, 0);
+			
+			sheetloader = new SheetLoader(System.getProperty("user.dir")
+					+ "\\img\\blockM_death.png", 1, 4, 16, 16);
+			for (int a = 0; a < 4; a++)
+				getPictureLoader().ImportFromSheet("blockmove_death_" + a, sheetloader,
 						a, 0);
 			
 			
@@ -266,6 +310,7 @@ public class StartClass extends MainClass {
 			AnimationHandler.getHandler("player2").addAnimation("player2_melee", "melee", 160, 0, false);
 			AnimationHandler.getHandler("player2").addAnimation("player2_attack", "attack", 160, 0, false);
 			AnimationHandler.getHandler("player2").addAnimation("player2_death", "death", 120, 0, false);
+
 			
 			AnimationHandler.addHandler("slime", 2);
 			AnimationHandler.getHandler("slime").addAnimation("slime", "walk", 120, 1, true);
@@ -278,6 +323,10 @@ public class StartClass extends MainClass {
 			AnimationHandler.addHandler("goldchicken", 2);
 			AnimationHandler.getHandler("goldchicken").addAnimation("goldchicken", "walk", 120, 1, true);
 			AnimationHandler.getHandler("goldchicken").addAnimation("goldchicken_death", "death", 120, 0, false);
+			
+			AnimationHandler.addHandler("bombchicken", 2);
+			AnimationHandler.getHandler("bombchicken").addAnimation("bombchicken", "walk", 120, 1, true);
+			AnimationHandler.getHandler("bombchicken").addAnimation("bombchicken_death", "death", 120, 0, false);
 			
 			AnimationHandler.addHandler("bloodslime", 2);
 			AnimationHandler.getHandler("bloodslime").addAnimation("bloodslime", "walk", 120, 1, true);
@@ -292,9 +341,16 @@ public class StartClass extends MainClass {
 			AnimationHandler.addHandler("blood", 1);
 			AnimationHandler.getHandler("blood").addAnimation("blood", "exist", 120, 1, true);
 			
+			AnimationHandler.addHandler("health", 1);
+			AnimationHandler.getHandler("health").addAnimation("health", "exist", 120, 1, true);
+			
 			AnimationHandler.addHandler("feather", 1);
 			AnimationHandler.getHandler("feather").addAnimation("feather", "exist", 120, 1, true);
 			
+			
+			AnimationHandler.addHandler("blockmove", 2);
+			AnimationHandler.getHandler("blockmove").addAnimation("blockmove", "exist", 120, 1, true);
+			AnimationHandler.getHandler("blockmove").addAnimation("blockmove_death", "death", 120, 0, false);
 			
 			AnimationHandler.addHandler("par0", 1);
 			AnimationHandler.getHandler("par0").addAnimation("par0", "exist", 120, 0, true);
@@ -313,6 +369,9 @@ public class StartClass extends MainClass {
 			
 			AnimationHandler.addHandler("par5", 1);
 			AnimationHandler.getHandler("par5").addAnimation("par5", "exist", 120, 0, true);
+			
+			AnimationHandler.addHandler("par6", 1);
+			AnimationHandler.getHandler("par6").addAnimation("par6", "exist", 120, 0, true);
 
 			for (int i = 0; i < 64; i++) {
 				HandledBlock b = new HandledBlock(i);
@@ -354,13 +413,13 @@ public class StartClass extends MainClass {
 	}
 	
 	public void load(int mapID) {
-		this.loadMap();
-//		getTextLoader().addIndex();
+		this.loadMap(100);
+		getTextLoader().addIndex();
 		this.setTimeRunning(false);
 
-
-		Render2D.chunkList = new int[1];
-		Render2D.chunkList[0] = 0;
+		if(mapID != 9){
+			Render2D.chunkList = new int[1];
+			Render2D.chunkList[0] = 0;
 
 		File f = new File(System.getProperty("user.dir") + "\\data\\map_" + mapID
 				+ ".txm");
@@ -439,8 +498,11 @@ public class StartClass extends MainClass {
 						z++;
 					}
 				}
-				if(getSavedData().getData("world") == getSavedData().getData("worldOld") && (float)getSavedData().getData("posX") >= 0)
+				if(getSavedData().getData("world") == getSavedData().getData("worldOld") && (float)getSavedData().getData("posX") >= 0){
 					player = new Location((float)getSavedData().getData("posX"),(float)getSavedData().getData("posZ"));
+				}else{
+					getSavedData().putData("block",0);
+				}
 				getSavedData().putData("worldOld",(int)getSavedData().getData("world"));
 				getSavedData().putData("posX",player.x);
 				getSavedData().putData("posZ",player.z);
@@ -457,10 +519,12 @@ public class StartClass extends MainClass {
 			e.printStackTrace();
 		}
 		this.setTimeRunning(true);
-		this.setLoaded();
 		getSavedData().saveToFile("player.txt");
-		
 		DialogClass.setDialog(this, mapID);
+		this.setLoaded(true);
+		
+		}
+		
 	}
 
 	public static boolean rerender = false;

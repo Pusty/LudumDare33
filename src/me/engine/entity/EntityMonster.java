@@ -8,7 +8,7 @@ import me.engine.main.MainClass;
 
 public class EntityMonster extends EntityLiving {
 	protected String playerName;
-	public EntityMonster(MainClass m,int x, int y, String name) {
+	public EntityMonster(MainClass m,float x, float y, String name) {
 		super(m ,x, y,1f,1f);
 		playerName = name;
 	}

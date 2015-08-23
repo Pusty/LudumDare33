@@ -25,8 +25,8 @@ public class Player extends EntityLiving {
 		super(m ,x, y,1f,1f);
 //		this.setMainItem(new Item(30));
 //		this.setUtilItem(new Item(31));
-//		setSkill(0,Inventory.skillByIndex((int)m.getSavedData().getData("skill")));
-		setSkill(0,Inventory.skillByIndex(4));
+		setSkill(0,Inventory.skillByIndex((int)m.getSavedData().getData("skill")));
+//		setSkill(0,Inventory.skillByIndex(4));
 	}
 	
 	public void setSkill(int id,Skill s){
@@ -76,6 +76,9 @@ public class Player extends EntityLiving {
 		super.setHealth(h);
 		main.getSavedData().putData("health", h);
 	}
+	
+	@Override
+	public int getStartHealth(){return 7;}
 
 	Random random = new Random();
 	public void tick(MainClass m){
@@ -183,8 +186,9 @@ public class Player extends EntityLiving {
 	public String getDialogText(Random random) {
 	int index = random.nextInt(3);
 	if(index==0)return null;
-	if(index==1)return "Maybe some cheese is nearby?";
-	if(index==2)return "I am going to collect all the cheese in this world!";
+	if(index==1)return "UIIIIII";
+	if(index==2)return "CHEEEESEE";
+	if(index==3)return "CHICKEENS";
 		return null;
 	}
 

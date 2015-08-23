@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.engine.entity.EntityBloodSlime;
+import me.engine.entity.EntityBombChicken;
 import me.engine.entity.EntityChicken;
+import me.engine.entity.EntityChickenBoss;
+import me.engine.entity.EntityHuman;
 import me.engine.entity.EntityPortal;
+import me.engine.entity.NPCEntity;
 import me.engine.location.Location;
 import me.engine.main.MainClass;
 import me.engine.world.LevelScript;
@@ -24,9 +28,11 @@ public class Level01 extends LevelScript{
 		metas = new ArrayList<Integer>();
 		triggered=false;
 	}
+	boolean spawn=false;
 	public void addEnemy(MainClass m ,World w, int metaID, int x, int z) {
-		w.addEntity(new EntityChicken(m,x,z));
+			w.addEntity(new EntityChicken(m,x,z));
 	}
+	
 	public void addPortal(MainClass m ,World w, int metaID, int x, int z) {
 		if(metaID-7!=metaID){
 		 locs.add(new Location(x,z));

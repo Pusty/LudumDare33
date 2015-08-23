@@ -193,16 +193,17 @@ public abstract class MainClass {
 	}
 	public TextPopup[] getTextPopupArray(){return popuplist;}
 	public void addLoading(){if(mapLoading>0)mapLoading--;}
-	public void setLoaded(){mapLoaded=true;}
+	public void setLoaded(boolean b){mapLoaded=b;}
 	int mapLoading=0;
 	boolean mapLoaded=false;
-	public void loadMap(){
-		mapLoading=100;
+	public void loadMap(int time){
+		mapLoading=time;
 		mapLoaded=false;
 	}
 	public int getMapLoading(){
 		return mapLoading;
 	}
+	public boolean mapLoadingInt(){return mapLoading<=0;}
 	public boolean hasMapLoaded() {
 		return mapLoaded && mapLoading<=0;
 	}

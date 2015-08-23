@@ -3,8 +3,14 @@ package me.game.leveldesign;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.engine.entity.Entity;
+import me.engine.entity.EntityBlock;
 import me.engine.entity.EntityBloodSlime;
+import me.engine.entity.EntityBombChicken;
 import me.engine.entity.EntityChicken;
+import me.engine.entity.EntityGoal;
+import me.engine.entity.EntityGoldChicken;
+import me.engine.entity.EntityHuman;
 import me.engine.entity.EntityPortal;
 import me.engine.location.Location;
 import me.engine.main.MainClass;
@@ -13,32 +19,43 @@ import me.engine.world.World;
 
 public class Level07 extends LevelScript{
 
-	List<Location> locs;
-	List<Integer> metas;
 	boolean triggered;
 	public Level07() {
 		super(1);
 	}
 	public void init(MainClass m){
-		locs = new ArrayList<Location>();
-		metas = new ArrayList<Integer>();
 		triggered=false;
 	}
-	public void addEnemy(MainClass m ,World w, int metaID, int x, int z) {
-		w.addEntity(new EntityChicken(m,x,z));
-	}
 	public void addPortal(MainClass m ,World w, int metaID, int x, int z) {
-		if(metaID-7!=metaID){
-		 locs.add(new Location(x,z));
-		 metas.add(metaID-7);
-		}else
-			m.getWorld().addEntity(new EntityPortal(m,x,z,true,metaID-7,true));
-	}
-	public void mapTick(MainClass m){
-		if(m.getWorld().getEntityArraySize()==0 && !triggered){
-			for(int index=0;index<locs.size();index++)
-			m.getWorld().addEntity(new EntityPortal(m,locs.get(index).getX(),locs.get(index).getZ(),false,metas.get(index),true));
-			triggered=true;
+		if(metaID-7 == 1 || metaID-7 == 2 || metaID-7 == 3){
+			w.addEntity(new EntityBlock(m,x,z,metaID-7));
+		}else{
+		super.addPortal(m,w,metaID,x,z);
 		}
 	}
+	
+	public void addEnemy(MainClass m ,World w, int metaID, int x, int z) {
+		w.addEntity(new EntityGoldChicken(m,x,z));
+	}
+	public void addSpecial1(MainClass m ,World w, int metaID, int x, int z) {
+		w.addEntity(new EntityBombChicken(m,x,z));
+	}
+	public void addSpecial2(MainClass m ,World w, int metaID, int x, int z) {
+		w.addEntity(new EntityGoal(m,x,z));
+	}
+	
+	public void mapTick(MainClass m){
+		if(!triggered){
+						for(int index2=0;index2<m.getWorld().getEntityArray().length;index2++){
+							Entity e2 = m.getWorld().getEntityArray()[index2];
+							if(e2 != null && e2 instanceof EntityBlock && ((EntityBlock) e2).getBlockID()<=(int)m.getSavedData().getData("block")){
+								((EntityBlock) e2).setDead(true);
+							}
+						}
+						if((int)m.getSavedData().getData("block")>=3)
+							triggered=true;
+					}
+			
+	}
+
 }

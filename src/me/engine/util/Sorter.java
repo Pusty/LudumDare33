@@ -35,13 +35,13 @@ public class Sorter {
 			return arrays;
 	}
 	
-	public static Object[] sortEntitys(Entity[] entitys,float playerZ){
+	public static Object[] sortEntitys(Entity[] entitys,float playerZ,float bossZ){
 		int amount=0;
 		for(int a=0;a<entitys.length;a++)
 			if(entitys[a]!=null)amount++;
 		
-		int[] values = new int[amount+1];
-		float[] valuesMessure = new float[amount+1];
+		int[] values = new int[amount+2];
+		float[] valuesMessure = new float[amount+2];
 		int index=0;
 		for(int i=0;i<entitys.length;i++){
 			if(entitys[i]==null)continue;
@@ -50,7 +50,9 @@ public class Sorter {
 			index++;
 		}
 		values[values.length-1]=-5;
+		values[values.length-2]=-4;
 		valuesMessure[values.length-1]=playerZ;
+		valuesMessure[values.length-2]=bossZ;
 		float val;int va;
 		for(int x=0;x<values.length;x++)
 		for (int a=0;a<values.length;a++){

@@ -20,6 +20,7 @@ public class TextLoader {
 	}
 	public void addIndex(){
 		index++;
+//		System.out.println("add Index");
 		if(index>=text.size())index=0;
 	}
 	Random random = new Random();
@@ -32,6 +33,7 @@ public class TextLoader {
 					System.out.println("TextFile does not exist");
 					text.add("404 cheese not found!");
 				} else {
+					System.out.println("TextFile is loading!");
 					FileInputStream fi = new FileInputStream(f);
 					InputStreamReader isr = new InputStreamReader(fi);
 					BufferedReader br = new BufferedReader(isr);
@@ -50,7 +52,8 @@ public class TextLoader {
 				e.printStackTrace();
 			}
 
-			index = random.nextInt(text.size());
+//			index = random.nextInt(text.size());
+		index=-1;
 		}
 	
 }

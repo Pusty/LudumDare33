@@ -28,10 +28,18 @@ public class ProjectileBlood extends Projectile{
 	}
 	public  String getName(){return "ProjectileBlood";}
 	
-
+	int maxticks = 10;
 	public String getTextureName(int i){return "blood";}
 	public void tick(MainClass m){
 		m.getWorld().addParticle(new Particle(getX(),getZ(),80,new Velocity(0,0),3));
+		
+		
+		
+		
+		if(maxticks>0)
+		maxticks--;
+		else
+		m.getWorld().removeEntity(this);
 	}
 	public void hit(MainClass m){
 		m.getWorld().addParticle(new Particle(getX(),getZ(),80,new Velocity(0,0),4));

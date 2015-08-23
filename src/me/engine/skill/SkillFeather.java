@@ -1,7 +1,9 @@
 package me.engine.skill;
 
+import me.engine.entity.EntityGoal;
 import me.engine.entity.EntityLiving;
 import me.engine.entity.Particle;
+import me.engine.entity.Player;
 import me.engine.entity.Projectile;
 import me.engine.entity.ProjectileFeather;
 import me.engine.entity.ProjectileFlame;
@@ -16,7 +18,7 @@ public class SkillFeather extends Skill {
 
 	@Override
 	public int getCooldown() {
-		return 240;
+		return 320;
 	}
 	
 	
@@ -67,4 +69,14 @@ public class SkillFeather extends Skill {
 		}
 		return false;
 	}
+	public boolean projectileHitGoal(MainClass m,Projectile p,EntityGoal hit){
+		if(!(this.sender instanceof Player))return false;
+		if(Location.getDistance(p.getLocation(), hit.getLocation()) < 1f){
+			hit.setHit(true);
+			m.getWorld().addParticle(new Particle(hit.getX(),hit.getZ(),80,new Velocity(0,0),1));
+		return true;
+		}
+		return false;
+	}
+	
 }

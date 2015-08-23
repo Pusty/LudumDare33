@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.engine.entity.EntityBloodSlime;
+import me.engine.entity.EntityBombChicken;
 import me.engine.entity.EntityChicken;
 import me.engine.entity.EntityPortal;
 import me.engine.entity.EntitySlime;
@@ -29,7 +30,7 @@ public class Level04 extends LevelScript{
 		w.addEntity(new EntitySlime(m,x,z));
 	}
 	public void addSpecial1(MainClass m ,World w, int metaID, int x, int z) {
-		w.addEntity(new EntityBloodSlime(m,x,z));
+		w.addEntity(new EntityBombChicken(m,x,z));
 	}
 	public void addSpecial2(MainClass m ,World w, int metaID, int x, int z) {
 		w.addEntity(new EntityChicken(m,x,z));

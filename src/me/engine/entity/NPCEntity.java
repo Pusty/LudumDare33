@@ -3,25 +3,20 @@ package me.engine.entity;
 import java.util.Random;
 
 import me.engine.location.Location;
+import me.engine.main.GameTickHandler;
+import me.engine.main.Inventory;
 import me.engine.main.MainClass;
+import me.engine.skill.SkillExplode;
+import me.engine.skill.SkillFireball;
 
 
 
 public class NPCEntity extends EntityLiving {
-	private String playerName;
-	public NPCEntity(MainClass m,int x, int y, String name) {
+	public NPCEntity(MainClass m,int x, int y) {
 		super(m ,x, y,1f,1f);
-		playerName = "player3";
-//		this.side=3;
-//		this.setMainItem(new Item(30));
-//		this.setUtilItem(new Item(31));
+		setSkill(0,new SkillFireball());
 	}
-	public String getPlayerName(){
-		return playerName;
-	}
-	public String getShownName(){
-		return playerName;
-	}
+
 	
 	public String getDialogText(Random r){
 		if(Location.getDistance(this.getLocation(), new Location(0,0)) < 5f)
@@ -42,8 +37,7 @@ public class NPCEntity extends EntityLiving {
 		try{
 		int x = Integer.parseInt(s.split(split)[0]);
 		int z = Integer.parseInt(s.split(split)[1]);
-		String name = s.split(split)[2];
-		e=new NPCEntity(m,x,z,name);
+		e=new NPCEntity(m,x,z);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -54,13 +48,16 @@ public class NPCEntity extends EntityLiving {
 		s=s+(int)this.getX();
 		s=s+split;
 		s=s+(int)this.getZ();
-		s=s+split;
-		s=s+playerName;
 		s=s+"\n";
 		return s;
 	}
+	public void death(MainClass m){
+		if((int)m.getSavedData().getData("chicken") > 0)
+		m.getWorld().getPlayer().setSkill(0, Inventory.skillByIndex(0));
+	}
+//	public float getSpeed(){return 0.1f;}
+	public float getSpeed(){return 0.0125f;}
 	
-	public float getSpeed(){return 0.1f;}
 	protected NPCEntity(){/*USED FOR DUMMY*/}
 	public  String getName(){return "NPCEntity";}
 	
@@ -70,11 +67,44 @@ public class NPCEntity extends EntityLiving {
 	}
 	
 	public String getTextureName(){
-		return this.playerName;
+		return "player1";
 	}
-	public void render(MainClass m){
-		super.render(m);
-}
+
+	
+	
+
+	public void recalcNextLocation(boolean b) {
+		times++;
+		timer++;
+		if(timer<=40 && !b)return;
+		timer=0;
+		if (nextlocation == null || times > 10){
+			nextlocation = main.getWorld().getPlayer().getLocation()
+					.add(new Location(random.nextFloat(), random.nextFloat()))
+					.clone();
+			times=0;
+		}
+		if (Location.getDistance(this.getLocation(), nextlocation) < 0.5f) {
+			nextlocation = main.getWorld().getPlayer().getLocation()
+					.add(new Location(random.nextFloat(), random.nextFloat()))
+					.clone();
+
+		}
+	}
+	
+	public void tick(MainClass m){
+		Location player  = m.getWorld().getPlayer().getLocation();
+		if(Math.abs(player.x - this.getX()) < 2f || Math.abs(player.z - this.getZ()) < 2f ){
+			if((player.x - this.getX() < 0 && player.x - this.getX() > -2f && side==0)
+				|| (player.x - this.getX() > 0 && player.x - this.getX() < 2f && side==1)
+				|| (player.z - this.getZ() < 0 && player.z - this.getX() > -2f && side==3)
+				|| (player.z - this.getZ() > 0 && player.z - this.getZ() < 2f && side==2)
+				)
+			addStatus("SKILL1",999999,false);
+		}
+		
+		super.tick(m);
+	}
 
 
 }

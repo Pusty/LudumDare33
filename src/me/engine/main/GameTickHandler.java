@@ -3,6 +3,10 @@ package me.engine.main;
 
 
 import me.engine.entity.Entity;
+import me.engine.entity.EntityBlock;
+import me.engine.entity.EntityGoal;
+import me.engine.entity.EntityGoldChicken;
+import me.engine.entity.EntityItem;
 import me.engine.entity.EntityLiving;
 import me.engine.entity.EntityMonster;
 import me.engine.entity.EntityPortal;
@@ -71,6 +75,37 @@ int tickupdate=40;
 			if(mainclass.getWorld().getParticleArray()[i].getAnimation().getCurA().played)
 				mainclass.getWorld().getParticleArray()[i]=null;
 		}
+		
+		//Boss Enemy
+		if(mainclass.getWorld().getBoss()!=null)
+			{
+				mainclass.getWorld().getBoss().tick(mainclass);
+				movingTickEntity(mainclass, mainclass.getWorld().getBoss());
+				mainclass.getWorld().getBoss().addRender();
+				mainclass.getWorld().getBoss().recalcNextLocation(false);
+				
+				if(ticks==tickupdate){
+					Location next = 	mainclass.getWorld().getBoss().getNextLocation();
+					Location mainl = 	mainclass.getWorld().getBoss().getLocation();
+					if (next.x > mainl.x && Math.abs(next.x - mainl.x) > 0.1f)
+						mainclass.getWorld().getBoss().right(mainclass);
+					else
+						mainclass.getWorld().getBoss().right=false;
+					if (next.x <= mainl.x && Math.abs(next.x - mainl.x) > 0.1f)
+						mainclass.getWorld().getBoss().left(mainclass);
+					else
+						mainclass.getWorld().getBoss().left=false;
+					if (next.z > mainl.z && Math.abs(next.z - mainl.z) > 0.1f)
+						mainclass.getWorld().getBoss().forward(mainclass);
+					else
+						mainclass.getWorld().getBoss().up=false;
+					if (next.z <= mainl.z && Math.abs(next.z - mainl.z) > 0.1f)
+						mainclass.getWorld().getBoss().backward(mainclass);
+					else
+						mainclass.getWorld().getBoss().down=false;
+				}
+			}
+		//Boss Enemy
 		for (int i = 0; i < mainclass.getWorld().getEntityArray().length; i++) {
 			if (mainclass.getWorld().getEntityArray()[i] == null)
 				continue;
@@ -83,6 +118,9 @@ int tickupdate=40;
 				
 				el.tick(mainclass);
 				movingTickEntity(mainclass, el);
+				
+				if(mainclass.getWorld().getBoss()!=null&& !(el instanceof EntityGoldChicken) && el.isDead() && el.getHealth() < 0)
+					mainclass.getWorld().getEntityArray()[i]=null;
 				
 				if (el instanceof NPCEntity) {
 						((NPCEntity) el).addRender();
@@ -126,6 +164,24 @@ int tickupdate=40;
 					((StartClass) mainclass).load((int)mainclass.getSavedData().getData("world"));
 					System.out.println("Load new map");
 				}
+			}  else if (mainclass.getWorld().getEntityArray()[i] instanceof EntityBlock) {
+				EntityBlock ep = (EntityBlock) mainclass.getWorld()
+						.getEntityArray()[i];
+				ep.addRender();
+			}  else if (mainclass.getWorld().getEntityArray()[i] instanceof EntityItem) {
+				EntityItem ep = (EntityItem) mainclass.getWorld()
+						.getEntityArray()[i];
+				if (ep == null)
+					continue;
+				ep.addRender();
+
+
+				if (Location.getDistance(mainclass.getWorld().getPlayer()
+						.getLocation(), ep.getLocation()) < 0.5f) {
+					// LOADING NEW MAP
+					Inventory.addItem(mainclass, 3, "Potion");
+					mainclass.getWorld().removeEntity(ep);
+				}
 			} else if (mainclass.getWorld().getEntityArray()[i] instanceof Projectile) {
 				Projectile pf = (Projectile) mainclass.getWorld()
 						.getEntityArray()[i];
@@ -143,6 +199,11 @@ int tickupdate=40;
 							EntityLiving el = (EntityLiving) mainclass
 									.getWorld().getEntityArray()[a];
 							if (pf.getSkill().projectileHit(mainclass,pf, el))
+								break;
+						}else if (mainclass.getWorld().getEntityArray()[a] instanceof EntityGoal) {
+							EntityGoal el = (EntityGoal) mainclass
+									.getWorld().getEntityArray()[a];
+							if (pf.getSkill().projectileHitGoal(mainclass,pf, el))
 								break;
 						}
 					}
@@ -165,6 +226,7 @@ int tickupdate=40;
 			.getLevel((int)mainclass.getSavedData().getData("world"))
 			.mapTick(mainclass);
 		}
+		
 //		if (mainclass.getWorld().getPlayer().getHealth() < 1)
 //			mainclass.setTimeRunning(false);
 		
@@ -237,19 +299,14 @@ int tickupdate=40;
 					Entity e = mainclass.getWorld().getEntityArray()[index];
 					if (e == null || e instanceof NPCEntity)
 						continue;
-					if (!(e instanceof EntityTree))
+					if (!(e instanceof EntityTree) && !(e instanceof EntityBlock))
 						continue;
-					if (Location.getDistance(
-							e.getLocation().add(new Location(0.25f, 0.25f)),
-							new Location(x, z)) < 0.5f)
+					
+					if (collision(e.getLocation(), x, z))
 						done = false;
-					if (Location.getDistance(
-							e.getLocation().add(new Location(0.25f, 0.25f)),
-							new Location(x2, z)) < 0.5f)
+					if (collision(e.getLocation(), x2, z))
 						done2 = false;
-					if (Location.getDistance(
-							e.getLocation().add(new Location(0.25f, 0.25f)),
-							new Location(x, z2)) < 0.5f)
+					if (collision(e.getLocation(), x, z2))
 						done3 = false;
 				}
 

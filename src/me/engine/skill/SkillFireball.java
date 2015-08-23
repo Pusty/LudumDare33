@@ -58,7 +58,7 @@ public class SkillFireball extends Skill {
 		if(hit.equals(sender))return false;
 		if(Location.getDistance(p.getLocation(), hit.getLocation()) < 0.5f){
 			int health = hit.getHealth();
-			int after = hit.damage(1,true);
+			int after = hit.damage(2,true);
 			if(health>after)
 			m.getWorld().addParticle(new Particle(hit.getX(),hit.getZ(),80,new Velocity(0,0),1));
 		

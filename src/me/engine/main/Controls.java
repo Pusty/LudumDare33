@@ -82,7 +82,7 @@ public class Controls {
 			f5pressed = false;
 		}
 
-		if (true) {
+		if (mainclass.hasMapLoaded()) {
 
 			int mx = Mouse.getX();
 			int mz = Mouse.getY();
@@ -145,8 +145,6 @@ public class Controls {
 			if (!Mouse.isButtonDown(0))
 				ispressed = false;
 
-			if (!Keyboard.isKeyDown(Keyboard.KEY_C))
-				ispressedChange = false;
 
 			if(Mouse.isButtonDown(1) && mainclass.getDialog() == null && mainclass.getGui() == null){
 				Random random = new Random();
@@ -162,7 +160,7 @@ public class Controls {
 							String text = npc.getDialogText(random);
 							if(text==null || Location.getDistance(mainclass.getWorld().getPlayer().getLocation(),npc.getLocation())>2f)continue;
 							endtext=text;
-							name=npc.getPlayerName();
+							name="z";
 							break;
 						}
 					}
