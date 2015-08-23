@@ -359,6 +359,8 @@ public class EntityLiving extends Entity {
 		}
 		if(start>getHealth())this.addStatus("DMG",Status.DAMAGE_COOLDOWN,false);
 		
+		if(i>0 && getHealth()>0)	main.getSoundPlayer().playSound("hit", true);
+		else if(i>0)	main.getSoundPlayer().playSound("death", true);
 		return getHealth();
 	}
 
@@ -387,11 +389,14 @@ public class EntityLiving extends Entity {
 		down=true;
 		return true;
 	}
-	public void death(MainClass m){}
+	public void death(MainClass m){
+		
+	}
 	public void tick(MainClass m){
 	//TICK Entity SKILLS AND SO ON	
 		if(this.getHealth()==0 && !death){
 			death(m);
+			m.getSoundPlayer().playSound("death", true);
 			death=true;
 		}
 	if(getHealth()>0){

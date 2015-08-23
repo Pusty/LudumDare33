@@ -247,7 +247,7 @@ int creditsindex=0;
 			if(mainclass.getGui() != null){
 				for(int in=0;in<mainclass.getGui().size();in++){
 					if(mainclass.getGui().getGuiPart(in)==null)continue;
-					mainclass.getGui().getGuiPart(in).Paint();
+					mainclass.getGui().getGuiPart(in).render(mainclass);
 				}
 			}
 			
@@ -299,11 +299,8 @@ int creditsindex=0;
 			}else{
 				String[] credits = {"Credits:"
 						,"Ludum Dare 33: A Foxs Journey"
-						,"A Game created by Pusty and DEADspy"
-						,"Game Engine: Pusty"
-						,"Grafical User Interface: DEADspy"
-						,"Grafics: Pusty"
-						,"Music: DEADspy"
+						,"A Game created by Pusty"
+						,"Special thanks to DEADspy"
 						,"Game written in Java"
 						,"Framework: LWJGL"
 						,"------------"

@@ -43,7 +43,7 @@ public class SkillSummon extends Skill {
 			else if(index == 3 || index == 4)
 				skillproj[0]=m.getWorld().addEntity(new EntityBombChicken(m,living.getX()+v.x/2f,living.getZ()+v.z/2f));
 			
-			m.getSoundPlayer().playSound("exp"+0, true);
+			m.getSoundPlayer().playSound("attack", true);
 		}
 	}
 

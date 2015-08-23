@@ -35,6 +35,12 @@ public class DialogClass {
 		}else if(mapID == 6){
 			m.setDialog("Me",
 					"Oh! Another human being! Maybe it can tell me what is going on!");
+		}else if(mapID == 7){
+			m.setDialog("Me",
+					"Why are they attacking me? Maybe if I fight the chicken boss this will stop!");
+		}else if(mapID == 8){
+			m.setDialog("Me",
+					"The Chicken Boss! I have to fight it!");
 		}
 		
 		m.getSavedData().putData("dialog", mapID);
@@ -128,6 +134,13 @@ public class DialogClass {
 					}
 				}
 				//Seeing the goal
+			}else if(mapID == 8){
+				if(!inMapIndex[0] && m.getWorld().getEntityArraySize() == 0 && m.getWorld().getBoss() != null && m.getWorld().getBoss().getHealth()<1){
+					m.setDialog("Me",
+							"Finally I did it! Now lets see where this portal is leading to!");
+					inMapIndex[0]=true;
+				}
+				//Golden Chicken
 			}
 	}
 }

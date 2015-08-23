@@ -43,7 +43,7 @@ public class SkillSmash extends Skill {
 					}
 				}
 			
-			m.getSoundPlayer().playSound("exp"+0, true);
+			m.getSoundPlayer().playSound("exp", true);
 		}
 	}
 	

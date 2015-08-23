@@ -34,7 +34,7 @@ public class SkillBloodball extends Skill {
 			if(living.getSide()==2)v=new Velocity(0.5f/20,0);
 			if(living.getSide()==3)v=new Velocity(-0.5f/20,0);
 			skillproj[0]=m.getWorld().addEntity(new ProjectileBlood(m,living.getX()+v.x/2f,living.getZ()+v.z/2f,v,this));
-			m.getSoundPlayer().playSound("exp"+0, true);
+			m.getSoundPlayer().playSound("attack", true);
 		}
 	}
 
@@ -68,9 +68,10 @@ public class SkillBloodball extends Skill {
 	}
 	
 	public boolean projectileHitGoal(MainClass m,Projectile p,EntityGoal hit){
-		if(Location.getDistance(p.getLocation(), hit.getLocation()) < 1f){
+		if(Location.getDistance(p.getLocation(), hit.getLocation()) < 1f && hit.isHit()==false){
 			hit.setHit(true);
 			m.getWorld().addParticle(new Particle(hit.getX(),hit.getZ(),80,new Velocity(0,0),4));
+			m.getSoundPlayer().playSound("hit", true);
 		return true;
 		}
 		return false;

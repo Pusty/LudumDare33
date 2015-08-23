@@ -54,6 +54,7 @@ public class SkillBite extends Skill {
 				if(hitting instanceof EntityChicken)
 				living.damage(-1, false);
 			}
+			m.getSoundPlayer().playSound("hit", true);
 			
 			//SOUND HERE
 		}

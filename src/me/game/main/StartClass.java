@@ -11,9 +11,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import spy.gui.features.Button;
-import spy.gui.features.Form;
-import spy.gui.features.SkillInventory;
 import me.engine.location.Location;
 import me.engine.main.Controls;
 import me.engine.main.DialogClass;
@@ -23,6 +20,9 @@ import me.engine.main.MainClass;
 import me.engine.multiplayer.DataClient;
 import me.engine.block.HandledBlock;
 import me.engine.entity.Player;
+import me.engine.gui.Button;
+import me.engine.gui.GuiScreen;
+import me.engine.gui.SkillInventory;
 import me.engine.world.LevelScript;
 import me.engine.world.World;
 import me.engine.render.AnimationHandler;
@@ -413,6 +413,7 @@ public class StartClass extends MainClass {
 	}
 	
 	public void load(int mapID) {
+		getSoundPlayer().playSound("select", true);
 		this.loadMap(100);
 		getTextLoader().addIndex();
 		this.setTimeRunning(false);
@@ -536,7 +537,7 @@ public class StartClass extends MainClass {
 
 	}
 	public static void openInventory(MainClass m){
-	/*	if(m.getGui() != null)return;
+		if(m.getGui() != null)return;
 		 GuiScreen gui = new GuiScreen(3);	
 		gui.setGuiPart(0, new Button(new Location(6,-10),6,2,0,18,60,100,"Exit"){
 			@Override
@@ -547,23 +548,6 @@ public class StartClass extends MainClass {
 		gui.setGuiPart(1, new SkillInventory(new Location(-4.5f,1.75f)));
 		
 		gui.setGuiPart(2, new Button(new Location(-12,-10),6,2,0,18,0,40,"Use"){
-			@Override
-			public void buttonClick(MainClass m,float mx,float mz){
-				Inventory.useItem(m, ((SkillInventory)(m.getGui().getGuiPart(1))).getItemIndex());
-			}
-		});
-		m.setGui(gui);*/
-		if(m.getGui() != null)return;
-		Form gui = new Form(new Location(0,0),new Location(0,0),"",3);	
-		gui.setGuiPart(0,new Button(new Location(6,-10),new Location(6,2),"Exit",0,18,60,100){
-			@Override
-			public void buttonClick(MainClass m,float mx,float mz){
-				Controls.close(m);
-			}
-		});
-		gui.setGuiPart(1, new SkillInventory(new Location(-4.5f,1.75f)));
-		
-		gui.setGuiPart(2, new Button(new Location(-12,-10),new Location(6,2),"Use",0,18,0,40){
 			@Override
 			public void buttonClick(MainClass m,float mx,float mz){
 				Inventory.useItem(m, ((SkillInventory)(m.getGui().getGuiPart(1))).getItemIndex());
@@ -600,9 +584,15 @@ public class StartClass extends MainClass {
 
 	getSoundPlayer().addToBuffer("bg",System.getProperty("user.dir") + "\\util\\track_1_short.wav", false,0.2f);
 	getSoundPlayer().addToBuffer("bg_long",System.getProperty("user.dir") + "\\util\\track_1.wav", true,0.2f);
-	getSoundPlayer().addToBuffer("exp0",System.getProperty("user.dir") + "\\util\\exp_0.wav", false,1f);
-	getSoundPlayer().addToBuffer("exp1",System.getProperty("user.dir") + "\\util\\exp_1.wav", false,1f);
-	getSoundPlayer().addToBuffer("hit0",System.getProperty("user.dir") + "\\util\\hit_0.wav", false,1f);
+
+	getSoundPlayer().addToBuffer("exp",System.getProperty("user.dir") + "\\util\\exp.wav", false,1f);
+	getSoundPlayer().addToBuffer("attack",System.getProperty("user.dir") + "\\util\\attack.wav", false,1f);
+	getSoundPlayer().addToBuffer("death",System.getProperty("user.dir") + "\\util\\death.wav", false,1f);
+	getSoundPlayer().addToBuffer("feather",System.getProperty("user.dir") + "\\util\\feather.wav", false,1f);
+	getSoundPlayer().addToBuffer("hit",System.getProperty("user.dir") + "\\util\\hit.wav", false,1f);
+	getSoundPlayer().addToBuffer("select",System.getProperty("user.dir") + "\\util\\select.wav", false,1f);
+	getSoundPlayer().addToBuffer("shot",System.getProperty("user.dir") + "\\util\\shot.wav", false,1f);
+	getSoundPlayer().addToBuffer("powerup",System.getProperty("user.dir") + "\\util\\powerup.wav", false,1f);
 	}
 
 

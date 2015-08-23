@@ -2,12 +2,13 @@ Press SPACE to use a skill
 Press ESC to open the menu
 Press F1 to retry a level
 Press the right mouse button to pause the game
-Game and assets created by Pusty and DEADspy
+Game and assets created by Pusty
 Cheese is actually yellow
 404 cheese not found
 This loading screen is just wasting time!
 I have no clue what I am typing
 Ludum Dare is actually fun! :D
+BLBLBLBLBLLB
 You died at least once! O:
 You died more then once! O:
 - Your add could be here -

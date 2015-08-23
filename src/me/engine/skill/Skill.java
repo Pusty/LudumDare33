@@ -29,9 +29,10 @@ public abstract class Skill {
 	}
 	
 	public boolean projectileHitGoal(MainClass m,Projectile p,EntityGoal hit){
-		if(Location.getDistance(p.getLocation(), hit.getLocation()) < 1f){
+		if(Location.getDistance(p.getLocation(), hit.getLocation()) < 1f && hit.isHit()==false){
 			hit.setHit(true);
 			m.getWorld().addParticle(new Particle(hit.getX(),hit.getZ(),80,new Velocity(0,0),1));
+			m.getSoundPlayer().playSound("hit", true);
 		return true;
 		}
 		return false;
