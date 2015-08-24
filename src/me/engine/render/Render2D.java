@@ -94,10 +94,34 @@ int creditsindex=0;
 	float camdis = -15f;
 
 	float xmove=0;
-
+	static boolean changeMusic=false;
+	static int changeMusicInt=-1;
+	public static void changeMusic(MainClass m,int lvl){
+		changeMusicInt=lvl;
+		changeMusic=true;
+	}
 	public void render() {
-	 mainclass.getSoundPlayer().playSound("bg_long", false);	
 		while (mainclass.isRunning()) {
+			if(changeMusic){
+				if(changeMusicInt>=0){
+					try{
+						mainclass.getSoundPlayer().stopSound("bg1_long");
+						mainclass.getSoundPlayer().stopSound("bg2_long");
+						mainclass.getSoundPlayer().stopSound("bg3_long");
+						
+						if(changeMusicInt == 1 || changeMusicInt == 2 || changeMusicInt == 3){
+							 mainclass.getSoundPlayer().playSound("bg1_long", false);	
+						}
+						else if(changeMusicInt == 4 || changeMusicInt == 5 || changeMusicInt == 6 || changeMusicInt == 7){
+							mainclass.getSoundPlayer().playSound("bg2_long", false);	
+						}
+						else {
+							mainclass.getSoundPlayer().playSound("bg3_long", false);	
+						}
+						}catch(Exception e){}	
+				}
+				changeMusic=false;
+			}
 			if(mainclass.hasMapLoaded()){
 			if (!mainclass.isTimeRunning()) {
 				try {

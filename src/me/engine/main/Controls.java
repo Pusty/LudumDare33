@@ -222,32 +222,6 @@ public class Controls {
 				}else
 					mainclass.getWorld().getPlayer().down=false;
 				
-				if (Keyboard.isKeyDown(Keyboard.KEY_U)) {
-					Location to=new Location(0,0);
-					for(Entity e:mainclass.getWorld().getEntityArray()){
-						if(e==null || !(e instanceof EntityPortal))continue;
-						if(((EntityPortal)e).isFrom() && ((EntityPortal)e).getPortal() == (int)mainclass.getSavedData().getData("worldOld"))to = e.getLocation().clone();
-					}
-					mainclass.getWorld().getPlayer().getLocation().set(to);
-				}
-				
-		
-				if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
-					debugAnimation=0;
-					mainclass.getSoundPlayer().unpauseAll();
-				}
-				if (Keyboard.isKeyDown(Keyboard.KEY_C)) {
-					debugAnimation=1;
-					mainclass.getSoundPlayer().pauseAll();
-				}
-				if (Keyboard.isKeyDown(Keyboard.KEY_V)) {
-					debugAnimation=2;
-					mainclass.getSoundPlayer().stopSound("bg");
-					mainclass.getSoundPlayer().stopSound("bg_long");
-				}
-				if (Keyboard.isKeyDown(Keyboard.KEY_B)) {
-					debugAnimation=3;
-				}
 				
 				if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
 					Player p = mainclass.getWorld().getPlayer();

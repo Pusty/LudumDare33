@@ -513,6 +513,7 @@ public class StartClass extends MainClass {
 				this.setWorld(world);
 				reRender(world);
 				rerender = true;
+				Render2D.changeMusic(this,mapID);
 			}
 
 		} catch (Exception e) {
@@ -582,8 +583,9 @@ public class StartClass extends MainClass {
 	@Override
 	public void SoundInit() {
 
-	getSoundPlayer().addToBuffer("bg",System.getProperty("user.dir") + "\\util\\track_1_short.wav", false,0.2f);
-	getSoundPlayer().addToBuffer("bg_long",System.getProperty("user.dir") + "\\util\\track_1.wav", true,0.2f);
+	getSoundPlayer().addToBuffer("bg1_long",System.getProperty("user.dir") + "\\util\\game_1_long.wav", true,0.2f);
+	getSoundPlayer().addToBuffer("bg2_long",System.getProperty("user.dir") + "\\util\\game_2_long.wav", true,0.2f);
+	getSoundPlayer().addToBuffer("bg3_long",System.getProperty("user.dir") + "\\util\\game_3_long.wav", true,0.2f);
 
 	getSoundPlayer().addToBuffer("exp",System.getProperty("user.dir") + "\\util\\exp.wav", false,1f);
 	getSoundPlayer().addToBuffer("attack",System.getProperty("user.dir") + "\\util\\attack.wav", false,1f);
