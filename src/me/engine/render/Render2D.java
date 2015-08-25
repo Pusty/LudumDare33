@@ -28,10 +28,11 @@ import me.engine.main.MainClass;
 import me.game.main.StartClass;
 
 
+import me.game.startscreen.StartScreen;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
-
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -644,7 +645,7 @@ int creditsindex=0;
 			Display.setTitle("LudumDare33 - A Fox's Journey");
 
 			Display.setIcon(getIcons(System.getProperty("user.dir")
-					+ "\\img\\icon32.png"));
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"icon32.png"));
 
 			Display.create();
 

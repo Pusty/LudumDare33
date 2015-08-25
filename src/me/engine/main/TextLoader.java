@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import me.game.startscreen.StartScreen;
+
 public class TextLoader {
 	List<String> text;
 	int index=0;
@@ -25,7 +27,7 @@ public class TextLoader {
 	}
 	Random random = new Random();
 	public void loadFromFile(String file){
-		File f = new File(System.getProperty("user.dir") + "\\data\\" + file);
+		File f = new File(System.getProperty("user.dir") + StartScreen.fileThing+"data"+StartScreen.fileThing + file);
 		String line = "";
 		try{
 		

@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
+import me.game.startscreen.StartScreen;
+
 
 public class SavedData {
 	HashMap<String,Object> data;
@@ -51,7 +53,7 @@ public class SavedData {
 	}
 	public void saveToFile(String file){
 		if(!loaded)return;
-		File f = new File(System.getProperty("user.dir") + "\\data\\" + file);
+		File f = new File(System.getProperty("user.dir") + StartScreen.fileThing+"data"+StartScreen.fileThing + file);
 		try {
 			if (!f.exists()) {
 				f.createNewFile();
@@ -76,7 +78,7 @@ public class SavedData {
 	}
 	
 	public void loadFromFile(String file){
-		File f = new File(System.getProperty("user.dir") + "\\data\\" + file);
+		File f = new File(System.getProperty("user.dir") + StartScreen.fileThing+"data"+StartScreen.fileThing + file);
 		String line = "";
 		try{
 		

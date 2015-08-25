@@ -36,6 +36,7 @@ import me.game.leveldesign.Level05;
 import me.game.leveldesign.Level06;
 import me.game.leveldesign.Level07;
 import me.game.leveldesign.Level08;
+import me.game.startscreen.StartScreen;
 
 public class StartClass extends MainClass {
 	public static boolean light=false;
@@ -48,32 +49,32 @@ public class StartClass extends MainClass {
 				try {
 					String folder = "player_" + i;
 					sheetloader = new SheetLoader(
-							System.getProperty("user.dir") + "\\img\\" + folder
-									+ "\\player.png", 1, 4 * 4, 16, 16);
+							System.getProperty("user.dir") + StartScreen.fileThing+"img"+StartScreen.fileThing + folder
+									+ StartScreen.fileThing+"player.png", 1, 4 * 4, 16, 16);
 					for (int a = 0; a < 4 * 4; a++) {
 						getPictureLoader().ImportFromSheet(
 								"player" + i + "_" + String.valueOf(a),
 								sheetloader, a, 0);
 					}
 					sheetloader = new SheetLoader(
-							System.getProperty("user.dir") + "\\img\\" + folder
-									+ "\\player_death.png", 1, 4 * 4, 16, 16);
+							System.getProperty("user.dir") + StartScreen.fileThing+"img"+StartScreen.fileThing + folder
+									+ StartScreen.fileThing+"player_death.png", 1, 4 * 4, 16, 16);
 					for (int a = 0; a < 4 * 4; a++) {
 						getPictureLoader().ImportFromSheet(
 								"player" + i + "_death_" + String.valueOf(a),
 								sheetloader, a, 0);
 					}
 					sheetloader = new SheetLoader(
-							System.getProperty("user.dir") + "\\img\\" + folder
-									+ "\\player_attack.png", 1, 4 * 4, 16, 16);
+								System.getProperty("user.dir") + StartScreen.fileThing+"img"+StartScreen.fileThing + folder
+									+ StartScreen.fileThing+"player_attack.png", 1, 4 * 4, 16, 16);
 					for (int a = 0; a < 4 * 4; a++) {
 						getPictureLoader().ImportFromSheet(
 								"player" + i + "_attack_" + String.valueOf(a),
 								sheetloader, a, 0);
 					}
 					sheetloader = new SheetLoader(
-							System.getProperty("user.dir") + "\\img\\" + folder
-									+ "\\player_melee.png", 1, 4 * 4, 16, 16);
+								System.getProperty("user.dir") + StartScreen.fileThing+"img"+StartScreen.fileThing + folder
+									+ StartScreen.fileThing+"player_melee.png", 1, 4 * 4, 16, 16);
 					for (int a = 0; a < 4 * 4; a++) {
 						getPictureLoader().ImportFromSheet(
 								"player" + i + "_melee_" + String.valueOf(a),
@@ -87,14 +88,14 @@ public class StartClass extends MainClass {
 			try {
 				String folder = "slime";
 				sheetloader = new SheetLoader(System.getProperty("user.dir")
-						+ "\\img\\" + folder + "\\slime.png", 1, 4 * 4, 16, 16);
+						+ StartScreen.fileThing+"img"+StartScreen.fileThing + folder + StartScreen.fileThing+"slime.png", 1, 4 * 4, 16, 16);
 				for (int a = 0; a < 4 * 4; a++) {
 					getPictureLoader()
 							.ImportFromSheet(folder + "_" + String.valueOf(a),
 									sheetloader, a, 0);
 				}
 				sheetloader = new SheetLoader(System.getProperty("user.dir")
-						+ "\\img\\" + folder + "\\slime_death.png", 1, 4 * 4,
+						+ StartScreen.fileThing+"img"+StartScreen.fileThing + folder + StartScreen.fileThing+"slime_death.png", 1, 4 * 4,
 						16, 16);
 				for (int a = 0; a < 4 * 4; a++) {
 					getPictureLoader().ImportFromSheet(
@@ -108,14 +109,14 @@ public class StartClass extends MainClass {
 			try {
 				String folder = "bloodslime";
 				sheetloader = new SheetLoader(System.getProperty("user.dir")
-						+ "\\img\\" + folder + "\\slime.png", 1, 4 * 4, 16, 16);
+						+ StartScreen.fileThing+"img"+StartScreen.fileThing + folder + StartScreen.fileThing+"slime.png", 1, 4 * 4, 16, 16);
 				for (int a = 0; a < 4 * 4; a++) {
 					getPictureLoader()
 							.ImportFromSheet(folder + "_" + String.valueOf(a),
 									sheetloader, a, 0);
 				}
 				sheetloader = new SheetLoader(System.getProperty("user.dir")
-						+ "\\img\\" + folder + "\\slime_death.png", 1, 4 * 4,
+						+ StartScreen.fileThing+"img"+StartScreen.fileThing + folder + StartScreen.fileThing+"slime_death.png", 1, 4 * 4,
 						16, 16);
 				for (int a = 0; a < 4 * 4; a++) {
 					getPictureLoader().ImportFromSheet(
@@ -129,14 +130,14 @@ public class StartClass extends MainClass {
 			try {
 				String folder = "chicken";
 				sheetloader = new SheetLoader(System.getProperty("user.dir")
-						+ "\\img\\" + folder + "\\chicken.png", 1, 4 * 4, 16, 16);
+						+ StartScreen.fileThing+"img"+StartScreen.fileThing + folder + StartScreen.fileThing+"chicken.png", 1, 4 * 4, 16, 16);
 				for (int a = 0; a < 4 * 4; a++) {
 					getPictureLoader()
 							.ImportFromSheet(folder + "_" + String.valueOf(a),
 									sheetloader, a, 0);
 				}
 				sheetloader = new SheetLoader(System.getProperty("user.dir")
-						+ "\\img\\" + folder + "\\chicken_death.png", 1, 4 * 4,
+						+ StartScreen.fileThing+"img"+StartScreen.fileThing + folder + StartScreen.fileThing+"chicken_death.png", 1, 4 * 4,
 						16, 16);
 				for (int a = 0; a < 4 * 4; a++) {
 					getPictureLoader().ImportFromSheet(
@@ -150,14 +151,14 @@ public class StartClass extends MainClass {
 			try {
 				String folder = "goldchicken";
 				sheetloader = new SheetLoader(System.getProperty("user.dir")
-						+ "\\img\\" + folder + "\\goldchicken.png", 1, 4 * 4, 16, 16);
+						+ StartScreen.fileThing+"img"+StartScreen.fileThing + folder + StartScreen.fileThing+"goldchicken.png", 1, 4 * 4, 16, 16);
 				for (int a = 0; a < 4 * 4; a++) {
 					getPictureLoader()
 							.ImportFromSheet(folder + "_" + String.valueOf(a),
 									sheetloader, a, 0);
 				}
 				sheetloader = new SheetLoader(System.getProperty("user.dir")
-						+ "\\img\\" + folder + "\\goldchicken_death.png", 1, 4 * 4,
+						+ StartScreen.fileThing+"img"+StartScreen.fileThing + folder + StartScreen.fileThing+"goldchicken_death.png", 1, 4 * 4,
 						16, 16);
 				for (int a = 0; a < 4 * 4; a++) {
 					getPictureLoader().ImportFromSheet(
@@ -172,14 +173,14 @@ public class StartClass extends MainClass {
 			try {
 				String folder = "bombchicken";
 				sheetloader = new SheetLoader(System.getProperty("user.dir")
-						+ "\\img\\" + folder + "\\bombchicken.png", 1, 4 * 4, 16, 16);
+						+ StartScreen.fileThing+"img"+StartScreen.fileThing + folder + StartScreen.fileThing+"bombchicken.png", 1, 4 * 4, 16, 16);
 				for (int a = 0; a < 4 * 4; a++) {
 					getPictureLoader()
 							.ImportFromSheet(folder + "_" + String.valueOf(a),
 									sheetloader, a, 0);
 				}
 				sheetloader = new SheetLoader(System.getProperty("user.dir")
-						+ "\\img\\" + folder + "\\bombchicken_death.png", 1, 4 * 4,
+						+ StartScreen.fileThing+"img"+StartScreen.fileThing + folder + StartScreen.fileThing+"bombchicken_death.png", 1, 4 * 4,
 						16, 16);
 				for (int a = 0; a < 4 * 4; a++) {
 					getPictureLoader().ImportFromSheet(
@@ -190,17 +191,11 @@ public class StartClass extends MainClass {
 			} catch (Exception e) {
 			}
 
-			// Image img = ImageIO.read(new
-			// File(System.getProperty("user.dir")+"\\data\\"+"map_0"+".png"));
-			// sheetloader = new
-			// SheetLoader(System.getProperty("user.dir")+"\\data\\"+"map_0"+".png",1,img.getWidth(null)/16,16,16);
-			// for(int a=0;a<img.getWidth(null)/16;a++){
-			// getPictureLoader().ImportFromSheet("block_"+String.valueOf(a),
-			// sheetloader, a,0);
-			// }
+
+
 
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
-					+ "\\img\\items.png", 8, 8, 16, 16);
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"items.png", 8, 8, 16, 16);
 			for (int a = 0; a < 8 * 8; a++) {
 				getPictureLoader().ImportFromSheet("item_" + String.valueOf(a),
 						sheetloader, a % 8, a / 8);
@@ -212,7 +207,7 @@ public class StartClass extends MainClass {
 					"1", "2", "3", "4", "5", "6", "7", "8", "9", "(", ")", "+",
 					"-", "/", " ", "_" };
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
-					+ "\\img\\letters.png", 8, 8, 16, 16);
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"letters.png", 8, 8, 16, 16);
 			for (int a = 0; a < letter.length; a++) {
 				getPictureLoader().ImportFromSheet("char_" + letter[a],
 						sheetloader, a % 8, a / 8);
@@ -220,55 +215,55 @@ public class StartClass extends MainClass {
 			}
 
 			getPictureLoader().addImage("shadow",
-					System.getProperty("user.dir") + "\\img\\shadow.png");
+					System.getProperty("user.dir") + StartScreen.fileThing+"img"+StartScreen.fileThing+"shadow.png");
 			getPictureLoader().addImage("tree",
-					System.getProperty("user.dir") + "\\img\\tree.png");
+					System.getProperty("user.dir") + StartScreen.fileThing+"img"+StartScreen.fileThing+"tree.png");
 			getPictureLoader().addImage("goal",
-					System.getProperty("user.dir") + "\\img\\goal.png");
+					System.getProperty("user.dir") + StartScreen.fileThing+"img"+StartScreen.fileThing+"goal.png");
 			getPictureLoader().addImage("goal_hit",
-					System.getProperty("user.dir") + "\\img\\goal_hit.png");
+					System.getProperty("user.dir") + StartScreen.fileThing+"img"+StartScreen.fileThing+"goal_hit.png");
 
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
-					+ "\\img\\flame.png", 1, 4, 16, 16);
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"flame.png", 1, 4, 16, 16);
 			for (int a = 0; a < 4; a++)
 				getPictureLoader().ImportFromSheet("flame_" + a, sheetloader,
 						a, 0);
 			
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
-					+ "\\img\\blood.png", 1, 4, 16, 16);
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"blood.png", 1, 4, 16, 16);
 			for (int a = 0; a < 4; a++)
 				getPictureLoader().ImportFromSheet("blood_" + a, sheetloader,
 						a, 0);
 			
 			
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
-					+ "\\img\\feather.png", 1, 4, 16, 16);
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"feather.png", 1, 4, 16, 16);
 			for (int a = 0; a < 4; a++)
 				getPictureLoader().ImportFromSheet("feather_" + a, sheetloader,
 						a, 0);
 			
 			
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
-					+ "\\img\\health.png", 1, 4, 16, 16);
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"health.png", 1, 4, 16, 16);
 			for (int a = 0; a < 4; a++)
 				getPictureLoader().ImportFromSheet("health_" + a, sheetloader,
 						a, 0);
 			
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
-					+ "\\img\\blockM.png", 1, 4, 16, 16);
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"blockM.png", 1, 4, 16, 16);
 			for (int a = 0; a < 4; a++)
 				getPictureLoader().ImportFromSheet("blockmove_" + a, sheetloader,
 						a, 0);
 			
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
-					+ "\\img\\blockM_death.png", 1, 4, 16, 16);
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"blockM_death.png", 1, 4, 16, 16);
 			for (int a = 0; a < 4; a++)
 				getPictureLoader().ImportFromSheet("blockmove_death_" + a, sheetloader,
 						a, 0);
 			
 			
 			sheetloader = new SheetLoader(System.getProperty("user.dir")
-					+ "\\img\\portal.png", 1, 4, 16, 16);
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"portal.png", 1, 4, 16, 16);
 			for (int a = 0; a < 4; a++)
 				getPictureLoader().ImportFromSheet("portal_" + a, sheetloader,
 						a, 0);
@@ -276,7 +271,7 @@ public class StartClass extends MainClass {
 			for(int n=0;n<10;n++){
 				try{
 					sheetloader = new SheetLoader(System.getProperty("user.dir")
-							+ "\\img\\particle_"+n+".png", 1, 4, 16, 16);
+							+ StartScreen.fileThing+"img"+StartScreen.fileThing+"particle_"+n+".png", 1, 4, 16, 16);
 					for (int a = 0; a < 4; a++)
 						getPictureLoader().ImportFromSheet("par"+n+"_" + a, sheetloader,
 								a, 0);
@@ -285,9 +280,9 @@ public class StartClass extends MainClass {
 			
 			try {
 				Image img = ImageIO.read(new File(System.getProperty("user.dir")
-						+ "\\data\\map_" + 0 + ".png"));
+						+ StartScreen.fileThing+"data"+StartScreen.fileThing+"map_" + 0 + ".png"));
 				 sheetloader = new SheetLoader(
-						System.getProperty("user.dir") + "\\data\\map_" + 0 + ".png",
+						System.getProperty("user.dir") + StartScreen.fileThing+"data"+StartScreen.fileThing+"map_" + 0 + ".png",
 						1, img.getWidth(null) / 16, 16, 16);
 				for (int a = 0; a < (img.getWidth(null) / 16); a++) {
 					getPictureLoader().ImportFromSheet(
@@ -422,9 +417,9 @@ public class StartClass extends MainClass {
 			Render2D.chunkList = new int[1];
 			Render2D.chunkList[0] = 0;
 
-		File f = new File(System.getProperty("user.dir") + "\\data\\map_" + mapID
+		File f = new File(System.getProperty("user.dir") + StartScreen.fileThing+"data"+StartScreen.fileThing+"map_" + mapID
 				+ ".txm");
-		File f2 = new File(System.getProperty("user.dir") + "\\data\\smap_" + mapID
+		File f2 = new File(System.getProperty("user.dir") + StartScreen.fileThing+"data"+StartScreen.fileThing+"smap_" + mapID
 				+ ".txm");
 		
 		LevelScript levelscript = LevelScript.getLevel(mapID);
@@ -583,18 +578,18 @@ public class StartClass extends MainClass {
 	@Override
 	public void SoundInit() {
 
-	getSoundPlayer().addToBuffer("bg1_long",System.getProperty("user.dir") + "\\util\\game_1_long.wav", true,0.2f);
-	getSoundPlayer().addToBuffer("bg2_long",System.getProperty("user.dir") + "\\util\\game_2_long.wav", true,0.2f);
-	getSoundPlayer().addToBuffer("bg3_long",System.getProperty("user.dir") + "\\util\\game_3_long.wav", true,0.2f);
+	getSoundPlayer().addToBuffer("bg1_long",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"game_1_long.wav", true,0.2f);
+	getSoundPlayer().addToBuffer("bg2_long",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"game_2_long.wav", true,0.2f);
+	getSoundPlayer().addToBuffer("bg3_long",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"game_3_long.wav", true,0.2f);
 
-	getSoundPlayer().addToBuffer("exp",System.getProperty("user.dir") + "\\util\\exp.wav", false,1f);
-	getSoundPlayer().addToBuffer("attack",System.getProperty("user.dir") + "\\util\\attack.wav", false,1f);
-	getSoundPlayer().addToBuffer("death",System.getProperty("user.dir") + "\\util\\death.wav", false,1f);
-	getSoundPlayer().addToBuffer("feather",System.getProperty("user.dir") + "\\util\\feather.wav", false,1f);
-	getSoundPlayer().addToBuffer("hit",System.getProperty("user.dir") + "\\util\\hit.wav", false,1f);
-	getSoundPlayer().addToBuffer("select",System.getProperty("user.dir") + "\\util\\select.wav", false,1f);
-	getSoundPlayer().addToBuffer("shot",System.getProperty("user.dir") + "\\util\\shot.wav", false,1f);
-	getSoundPlayer().addToBuffer("powerup",System.getProperty("user.dir") + "\\util\\powerup.wav", false,1f);
+	getSoundPlayer().addToBuffer("exp",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"exp.wav", false,1f);
+	getSoundPlayer().addToBuffer("attack",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"attack.wav", false,1f);
+	getSoundPlayer().addToBuffer("death",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"death.wav", false,1f);
+	getSoundPlayer().addToBuffer("feather",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"feather.wav", false,1f);
+	getSoundPlayer().addToBuffer("hit",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"hit.wav", false,1f);
+	getSoundPlayer().addToBuffer("select",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"select.wav", false,1f);
+	getSoundPlayer().addToBuffer("shot",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"shot.wav", false,1f);
+	getSoundPlayer().addToBuffer("powerup",System.getProperty("user.dir") + StartScreen.fileThing+"util"+StartScreen.fileThing+"powerup.wav", false,1f);
 	}
 
 

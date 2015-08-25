@@ -17,6 +17,7 @@ import me.engine.sound.SoundPlayer;
 import me.game.main.StartClass;
 
 public class StartScreen {
+	public static String fileThing ="/";
 	SoundPlayer soundloader=null;
 	PictureLoader picloader=null;
 	boolean isAlive=true; 
@@ -162,7 +163,7 @@ public class StartScreen {
 	private void initTexture(){
 		try{
 		SheetLoader sheetloader = new SheetLoader(System.getProperty("user.dir")
-				+ "\\img\\items.png", 8, 8, 16, 16);
+				+ StartScreen.fileThing+"img"+StartScreen.fileThing+"items.png", 8, 8, 16, 16);
 		for (int a = 0; a < 8 * 8; a++) {
 			picloader.ImportFromSheet("item_" + String.valueOf(a),
 					sheetloader, a % 8, a / 8);
@@ -174,7 +175,7 @@ public class StartScreen {
 				"1", "2", "3", "4", "5", "6", "7", "8", "9", "(", ")", "+",
 				"-", "/", " ", "_" };
 		sheetloader = new SheetLoader(System.getProperty("user.dir")
-				+ "\\img\\letters.png", 8, 8, 16, 16);
+				+ StartScreen.fileThing+"img"+StartScreen.fileThing+"letters.png", 8, 8, 16, 16);
 		for (int a = 0; a < letter.length; a++) {
 			picloader.ImportFromSheet("char_" + letter[a],
 					sheetloader, a % 8, a / 8);
@@ -218,7 +219,7 @@ public class StartScreen {
 			Display.setFullscreen(false); // FULLSCREEn
 			Display.setTitle("LudumDare33 - A Fox's Journey");
 			Display.setIcon(Render2D.getIcons(System.getProperty("user.dir")
-					+ "\\img\\icon32.png"));
+					+ StartScreen.fileThing+"img"+StartScreen.fileThing+"icon32.png"));
 
 			Display.create();
 
