@@ -11,6 +11,7 @@ import me.engine.entity.Player;
 import me.engine.location.Location;
 import me.game.main.StartClass;
 
+import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -30,6 +31,13 @@ public class Controls {
 					Thread.sleep(2000);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
+				}	
+				while(!Display.isCreated()){}
+				try {
+					Keyboard.create();
+				} catch (LWJGLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
 				}
 				while (mainclass.isRunning()) {
 					try {
